@@ -2,6 +2,7 @@
 #define JUEGO_H
 
 #include "defines.h"
+#include <iostream>
 
 class Juego{
 	public:

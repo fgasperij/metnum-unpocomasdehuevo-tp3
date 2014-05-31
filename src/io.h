@@ -47,7 +47,7 @@ void ignorarLineas(ifstream& ifs, int cantidad = 1)
 // Copio hasta el caracter c en el buffer.
 void obtenerHastaCaracter(ifstream& ifs, char * buffer, char c)
 {
-	ifs.get(buffer, std::numeric_limits<std::streamsize>::max(), c);	
+	ifs.get(buffer, std::numeric_limits<std::streamsize>::max(), c);
 }
 
 
@@ -65,11 +65,11 @@ void leerDatosBasicos(const char* file, Data& data){
 	for(int i = 0 ; i < CANT_MOVIMIENTOS; i++){
 		Posicion temp;
 		file_s >> temp.pos_x >> temp.pos_y;
-		data.movimientos.push_back(Posicion);
+		(data.movimientos).push_back(temp);
 		file_s.get();	// Saco el Enter
 	}
 
-	file_s.close();    
+	file_s.close();
 }
 
 
@@ -87,7 +87,7 @@ void escribirVectorS(ofstream& os, const vector<T>& b, int modo = VERT){
 	else if(modo == HORIZ){os << " ";}
 	}
 }
-	
+
 
 template<class T>
 void escribirVector(const char*  file, const vector<T>& b, int modo = VERT){

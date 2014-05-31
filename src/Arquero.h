@@ -1,18 +1,19 @@
-#ifndef JUEGO_H
-#define JUEGO_H
+#ifndef ARQUERO_H
+#define ARQUERO_H
 
 #include "defines.h"
 #include "Juego.h"
+#include <string>
 
-class Juego{
+class Arquero{
 	public:
 		Arquero();
-		Juego(char* n; Juego* j) : nombre(n), juego(j), posicion(j->damePosInicial()) {}
+		Arquero(string n, Juego* j) : nombre(n), juego(j), posicion(j->damePosInicial()) {}
 		void mover(double);
 
 	private:
+        string nombre;
 		Juego* juego;
-		char* nombre;
 		double posicion;
 
 };

@@ -1,30 +1,31 @@
 #include "Juego.h"
 
-int dameTiempo(){return this->timestamp;}
+int Juego::dameTiempo(){return this->timestamp;}
 
-Posicion damePosicion(int tiempo){
+Posicion Juego::damePosicion(int tiempo){
 	if(!(this->flag_test) && tiempo < timestamp+1){	// O timestamp, no estoy seguro
 		cerr << "No se puede conocer el futuro " << endl;
-		return 0;
+        Posicion trucha; trucha.pos_x = -1; trucha.pos_y = -1;
+		return trucha;
 	}
 	else{
 		return  (this->data->movimientos)[tiempo];
 	}
 }
 
-void avanzarJuego(){(this->timestamp)++;}
+void Juego::avanzarJuego(){(this->timestamp)++;}
 
-void setearFlagTest(bool status){this->flag_test = status;}
+void Juego::setearFlagTest(bool status){this->flag_test = status;}
 
-bool terminoJuego(){
+bool Juego::terminoJuego(){
 	return (this->timestamp == CANT_MOVIMIENTOS-1);	// O CANT_MOVIMIENTOS, no estoy seguro
 }
 
-double dameDesplMax(){return this->data->mu;}
+double Juego::dameDesplMax(){return this->data->mu;}
 
-double dameLimInf(){return this->data->lim_inf;}
+double Juego::dameLimInf(){return this->data->lim_inf;}
 
-double dameLimSup(){return this->data->lim_sup;}
+double Juego::dameLimSup(){return this->data->lim_sup;}
 
-double damePosInicial(){return this->data->pos_arq;}
+double Juego::damePosInicial(){return this->data->pos_arq;}
 

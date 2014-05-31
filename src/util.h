@@ -9,6 +9,7 @@
 #include <fstream>
 #include <iomanip>
 #include "defines.h"
+#include <stdlib.h>
 
 
 
@@ -27,7 +28,7 @@ bool es_par(int n);
 
 /*** Tipos de datos ***/
 template <typename T> std::string toStr ( T Number );
-template <typename T> 
+template <typename T>
 std::string toStr (T n)
   {
      std::ostringstream ss;

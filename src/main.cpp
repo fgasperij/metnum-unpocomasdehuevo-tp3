@@ -1,6 +1,6 @@
 
 /***
- * Métodos Numéricos - 1°Cuatr 2014 
+ * Métodos Numéricos - 1°Cuatr 2014
  * TP2 - Tu cara me suena...
  * ***/
 
@@ -8,8 +8,11 @@
 #include <fstream>
 #include "defines.h"
 #include "util.h"
+#include "io.h"
+#include "misc.h"
 #include "Matriz.h"
 #include "Juego.h"
+#include "Arquero.h"
 #include "signal.h"
 
 int main(int argc, char **argv)
@@ -29,16 +32,16 @@ int main(int argc, char **argv)
 	leerDatosBasicos(file_in, data);
 
 	Juego juego = Juego (&data);
-	Arquero higuita = Arquero("Higuita", &juego)
+	Arquero higuita = Arquero("Higuita", &juego);
 
-	while(!terminoJuego()){
+	while(!juego.terminoJuego()){
 		double aprox = aproximarTrayectoria(&juego);
 		higuita.mover(aprox);
-		//higuita.escorpion()		
-		avanzarJuego();
+		//higuita.escorpion()
+		juego.avanzarJuego();
 	}
-	
-	
+
+
 	msg_footer();
 
 	return 0;

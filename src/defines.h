@@ -10,7 +10,7 @@ using namespace std;
 typedef vector<int> Pos;
 
 /** Para medir tiempo de ejecución **/
-#define TIMER(var) clock_gettime(CLOCK_REALTIME, &var); 
+#define TIMER(var) clock_gettime(CLOCK_REALTIME, &var);
 
 /** Para colorear la consola **/
 #define ENDCOLOR "\033[0m"
@@ -31,7 +31,7 @@ typedef vector<int> Pos;
 struct Posicion{
 	double pos_x;
 	double pos_y;
-}
+};
 
 
 /** Parámetros de las imágenes de un mismo conjunto de entrenamiento **/
@@ -39,12 +39,12 @@ struct Data{
 	double mu;	// Desplazamiento maximo
 	double pos_arq;	// Posicion arquero y
 	// Limites del arco
-	double lim_inf;	
+	double lim_inf;
 	double lim_sup;
-	
+
 	// Movimientos de la pelota
 	vector<Posicion> movimientos;
-    
+
 //    void show_info(){
 //		cout<<YELLOW;
 //		cout << "\n -- Info del Conjunto de Entrenamiento --";
