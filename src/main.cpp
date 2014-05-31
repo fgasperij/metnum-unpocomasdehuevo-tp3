@@ -35,8 +35,9 @@ int main(int argc, char **argv)
 	Juego juego = Juego (&data);
 	Arquero higuita = Arquero("Higuita", &juego);
 
+
 	while(!juego.terminoJuego()){
-		double aprox = aproximarTrayectoria(&juego);
+		Posicion aprox = aproximarTrayectoria(&juego);
 		higuita.mover(aprox);
 		//higuita.escorpion()
 		juego.avanzarJuego();

@@ -10,7 +10,6 @@
 //#include <chrono>
 #include "Matriz.h"
 
-#define LONG_PGM 4
 
 // Funciones de entrada salida pare leer y escribir datos en archivos.
 // Siempre tratar de usar >> para eliminar los espacios.

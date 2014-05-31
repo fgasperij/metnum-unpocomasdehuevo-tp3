@@ -8,8 +8,9 @@
 #include "defines.h"
 
 // TODO: SIN IMPLEMENTAR
-double aproximarTrayectoria(Juego* juego){
-	return 0;
+Posicion aproximarTrayectoria(Juego* juego){
+    Posicion trucha; trucha.pos_x = -1; trucha.pos_y = -1;
+	return trucha;
 }
 
 #endif

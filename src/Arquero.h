@@ -9,7 +9,7 @@ class Arquero{
 	public:
 		Arquero();
 		Arquero(string n, Juego* j) : nombre(n), juego(j), posicion(j->damePosInicial()) {}
-		void mover(double);
+		void mover(Posicion);
 
 	private:
         string nombre;

@@ -18,7 +18,7 @@ void Juego::avanzarJuego(){(this->timestamp)++;}
 void Juego::setearFlagTest(bool status){this->flag_test = status;}
 
 bool Juego::terminoJuego(){
-	return (this->timestamp == CANT_MOVIMIENTOS);	// o CANT_MOVIMIENTOS, no estoy seguro
+	return (this->timestamp == CANT_MOVIMIENTOS);	// o CANT_MOVIMIENTOS-1, no estoy seguro
 }
 
 double Juego::dameDesplMax(){return this->data->mu;}

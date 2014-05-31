@@ -1,7 +1,7 @@
 #include "Arquero.h"
 
 // TODO: SIN IMPLEMENTAR
-void Arquero::mover(double aprox){
+void Arquero::mover(Posicion aprox){
 	double lim_inf = (this->juego)->dameLimInf();
 	double lim_sup = (this->juego)->dameLimSup();
 	double despl_max = (this->juego)->dameDesplMax();
