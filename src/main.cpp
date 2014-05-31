@@ -30,6 +30,7 @@ int main(int argc, char **argv)
 
 	Data data;
 	leerDatosBasicos(file_in, data);
+    data.show_info();
 
 	Juego juego = Juego (&data);
 	Arquero higuita = Arquero("Higuita", &juego);

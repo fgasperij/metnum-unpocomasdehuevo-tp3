@@ -4,6 +4,7 @@
 /*** DEFINICIONES BASICAS ***/
 
 #include <vector>
+#include <iostream>
 
 using namespace std;
 
@@ -45,18 +46,20 @@ struct Data{
 	// Movimientos de la pelota
 	vector<Posicion> movimientos;
 
-//    void show_info(){
-//		cout<<YELLOW;
-//		cout << "\n -- Info del Conjunto de Entrenamiento --";
-//		cout << "\n PATH:\t"<< base;
-//		cout << "\n ALTO:\t" << alto;
-//		cout << "\n ANCHO:\t" << ancho;
-//		cout << "\n p:\t" << personas;
-//		cout << "\n nimgp:\t" << imagenes;
-//		cout << "\n tests:\t" << tests;
-//		cout << "\n k:\t" << componentes << endl;
-//		cout<<ENDCOLOR;
-//	}
+    void show_info(){
+		cout<<YELLOW;
+		cout << "\n -- Info de los datos de entrada --";
+		cout << "\n MU:\t"<< mu;
+		cout << "\n POSICION DEL ARQUERO:\t" << pos_arq;
+		cout << "\n LIMITE INFERIOR:\t" << lim_inf;
+		cout << "\n LIMITE SUPERIOR:\t" << lim_sup;
+		cout << "\n MOVIMIENTOS:\t" << endl;
+        for(unsigned int i=0; i < movimientos.size(); i++){
+            cout << movimientos[i].pos_x << " " << movimientos[i].pos_y;
+            if(i != movimientos.size()){cout << endl;}
+        }
+		cout<<ENDCOLOR;
+	}
 };
 
 
