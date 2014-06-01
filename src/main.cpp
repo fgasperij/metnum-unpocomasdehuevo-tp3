@@ -1,7 +1,6 @@
-
 /***
  * Métodos Numéricos - 1°Cuatr 2014
- * TP2 - Tu cara me suena...
+ * TP3 - Un poco más de huevo
  * ***/
 
 #include <iostream>
@@ -18,6 +17,8 @@
 int main(int argc, char **argv)
 {
 
+	// MANEJAR SI EL PROGRAMA FUE LLAMADO DE MANERA INCORRECTA
+		
 	char * file_in = argv[1];
 	/*** Para evitar que se cambie el color al salir con Ctrl+C u otros ***/
 	struct sigaction sigIntHandler;

@@ -35,16 +35,14 @@ struct Posicion{
 };
 
 
-/** Parámetros de las imágenes de un mismo conjunto de entrenamiento **/
 struct Data{
-	double mu;	// Desplazamiento maximo
-	double pos_arq;	// Posicion arquero y
-	// Limites del arco
-	double lim_inf;
+	double mu;		// Desplazamiento maximo
+	double pos_arq;	// Posicion arquero
+	double lim_inf; // Limites del arco
 	double lim_sup;
 
-	// Movimientos de la pelota
-	vector<Posicion> movimientos;
+	// Trayectoria de la pelota
+	vector<Posicion> trayectoria;
 
     void show_info(){
 		cout<<YELLOW;
@@ -53,10 +51,10 @@ struct Data{
 		cout << "\n POSICION DEL ARQUERO:\t" << pos_arq;
 		cout << "\n LIMITE INFERIOR:\t" << lim_inf;
 		cout << "\n LIMITE SUPERIOR:\t" << lim_sup;
-		cout << "\n MOVIMIENTOS:\t" << endl;
-        for(unsigned int i=0; i < movimientos.size(); i++){
-            cout << movimientos[i].pos_x << " " << movimientos[i].pos_y;
-            if(i != movimientos.size()){cout << endl;}
+		cout << "\n TRAYECTORIA:\t" << endl;
+        for(unsigned int i=0; i < trayectoria.size(); i++){
+            cout << trayectoria[i].pos_x << " " << trayectoria[i].pos_y;
+            cout << endl;
         }
 		cout<<ENDCOLOR;
 	}
@@ -82,7 +80,7 @@ struct Data{
 #define COLUMNA 1
 
 /*** Cantidad de posiciones de la pelota ***/
-#define CANT_MOVIMIENTOS 24
+#define CANT_POSICIONES 24
 
 
 

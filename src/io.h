@@ -53,15 +53,14 @@ void obtenerHastaCaracter(ifstream& ifs, char * buffer, char c)
 
 
 //Lee los datos basios del archivo. La primer linea.
-void leerDatosBasicos(const char* file, Data& data){
-
+void leerDatosBasicos(const char* file, Data& data)
+{
 	ifstream file_s; file_s.open(file);
-
-	data.movimientos = vector<Posicion> (0);
+	data.movimientos = vector<Posicion>;
 
 	file_s >> data.pos_arq >> data.lim_inf >> data.lim_sup >> data.mu;
 	file_s.get();	//Saco el Enter.
-	for(int i = 0 ; i < CANT_MOVIMIENTOS; i++){
+	for(int i = 0 ; i < CANT_POSICIONES; i++){
 		Posicion temp;
 		file_s >> temp.pos_x >> temp.pos_y;
 		(data.movimientos).push_back(temp);

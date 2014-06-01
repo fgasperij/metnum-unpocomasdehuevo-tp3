@@ -1,0 +1,68 @@
+ASUMIMOS SOBRE LOS JUGADORES RIVALES
+
+acciones 
+-disparo al arco: el disparo al arco lo asumimos como una línea recta al centro
+del arco.
+-pase a jugador más cercano al arco que él
+
+LA PELOTA
+-su velocidad se mantiene 'constante' a menos que la patee un jugador
+-si la patea un jugador su velocidad aumenta, ¿cuánto?
+
+IDEAS
+
+En cada instante dado tenemos que determinar cuánto movemos al arquero en el
+intervalo [-mu, mu]. Para poder determinar cómo mover el arquero tenemos que
+proponer dónde creemos que va a terminar la pelota. Podemos tener más de una 
+proposición. Si pasa X terminaría en A, si pasa Y termina en B y si pasa Z 
+termina en C. Además debemos darle una probabilidad a cada una. Además debería
+tener en cuenta los posibles cambios de velocidad de cada una de las 
+posibilidad es X, Y y Z.
+
+Vamos a empezar por resolver un modelo muy simplificado del problema y luego
+vamos agregándole inteligencia en función del tiempo de desarrollo que nos
+sobre.
+
+MODELO 1
+¿DÓNDE CRUZA LA PELOTA LA LÍNEA DE META?
+Tenemos una serie de puntos y debemos encontrar una función que los interpole.
+Es decir, tenemos p1, p2, ..., pn y queremos encontrar una f(t) = (x(t), y(t)) 
+que me interpole esos puntos. Luego necesito saber x(t) = 125, es decir, la raíz
+de la función x'(t) = x(t) - 125. Con esa raíz evalúo y(t) y obtengo el punto
+estimado en el que la pelota cruzará la línea de meta.
+¿CÓMO MUEVO MI ARQUERO?
+Lo muevo de forma tal que la próxima posición sea lo más cerca posible a la
+posición en la que estimo que la pelota cruzará la línea de meta.
+
+
+DUDAS
+
+-Si en un instante está en (133, 100) y en el próximo está en (117, 100). El 
+arquero permanece en los dos instante en la posición (125, 100). ¿La atajó o no?
+Es decir, ¿puede suceder que la pelota nunca se describa a una distancia =< 7
+del arquero? 
+-¿El número de posiciones de la trayectoria de la pelota es fijo? ¿24?
+-¿podemos asumir que siempre viene primero lim_inf_arquero y después
+lim_sup_arquero?
+
+
+RESUMEN
+
+¿Atajado? Si la posición se encuentra a una distancia =< 7 del arquero.
+Asumimos que la posición del arco y del arquero es: x = 125
+
+archivo de entrada
+posiciónDelArquero palo1 palo2 muCotaSuperiorMovimiento
+x1 y1
+x2 y2
+...
+xn yn
+
+archivo de salida
+mov1
+mov2
+mov3
+mov4
+...
+movn
+
