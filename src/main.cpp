@@ -10,7 +10,7 @@
 #include "io.h"
 #include "misc.h"
 #include "Matriz.h"
-#include "Juego.h"
+#include "Disparo.h"
 #include "Arquero.h"
 #include "signal.h"
 
@@ -33,17 +33,15 @@ int main(int argc, char **argv)
 	leerDatosBasicos(file_in, data);
     data.show_info();
 
-	Juego juego = Juego (&data);
-	Arquero higuita = Arquero("Higuita", &juego);
+	Disparo disparo = Disparo(data.trayectoria);	
+	Arquero higuita = Arquero("Higuita", data.lim_inf, data.lim_sup, data.mu, data.pos_arq);
 
-
-	while(!juego.terminoJuego()){
-		Posicion aprox = aproximarTrayectoria(&juego);
-		higuita.mover(aprox);
-		//higuita.escorpion()
-		juego.avanzarJuego();
+	while(!disparo.detenido()){
+		disparo.tic();		
+		higuita.atajar(disparo.estimacionActual());
 	}
 
+	// ESCRIBIR EN EL OUT arquero.movimientos()
 
 	msg_footer();
 

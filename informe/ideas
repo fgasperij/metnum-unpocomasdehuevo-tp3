@@ -44,6 +44,7 @@ del arquero?
 -¿El número de posiciones de la trayectoria de la pelota es fijo? ¿24?
 -¿podemos asumir que siempre viene primero lim_inf_arquero y después
 lim_sup_arquero?
+-¿Cómo recibimos la posición de los jugadores rivales?
 
 
 RESUMEN
