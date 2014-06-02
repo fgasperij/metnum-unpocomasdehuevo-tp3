@@ -79,9 +79,4 @@ struct Data{
 #define FILA 0
 #define COLUMNA 1
 
-/*** Cantidad de posiciones de la pelota ***/
-#define CANT_POSICIONES 24
-
-
-
 #endif
