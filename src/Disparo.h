@@ -15,7 +15,7 @@ class Disparo{
 		/**
 		 * Recibe la trayectoria completa del disparo.
 		 */
-		Disparo(vector<pos> trayectoria) 
+		Disparo(vector<Posicion> trayectoria) 
 		: trayectoria(trayectoria), instanteActual(0), flag_test(false) {}
 		/**
 		 * Aumenta el instanteActual en 1, el disparo avanza una unidad de
@@ -37,17 +37,23 @@ class Disparo{
 		/**
 		 * Devuelve la trayectoria del disparo hasta el instanteActual.
 		 */
-		vector<pos> trayectoria();
-					
+		vector<Posicion> trayectoria();
+		/**
+		 * Devuelve true si no le queda más trayectoria por recorrer.		 
+		 */
+		bool detenido();		
+
 		void setearFlagTest(bool);
 
 	private:
 		/**
 		 * Trayectoria completa del disparo.
 		 */
-		vector<pos> trayectoria;
+		vector<Posicion> trayectoria;
 		/**
-		 * Momento acual de la simulación.
+		 * Momento acual de la simulación. El instante actual 0 se corresponde
+		 * con la primer posición de la trayectoria, es decir, donde comenzó
+		 * el disparo.
 		 */
 		int instanteActual;
 		bool flag_test;

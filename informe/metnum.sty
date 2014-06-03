@@ -1,0 +1,38 @@
+\usepackage{hyperref}
+\usepackage{color}
+\usepackage{paralist}
+\usepackage{multirow}
+\usepackage{footnote}
+\makesavenoteenv{tabular}
+\usepackage{pdflscape}
+\usepackage{enumitem}
+\usepackage{amsmath}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{lscape}
+\usepackage{placeins}
+
+%El siguiente paquete permite escribir la caratula facilmente
+\usepackage{caratula}
+\hypersetup{
+  pdftitle={ Métodos Numéricos - TP3 },
+  colorlinks,
+  citecolor=black,
+  filecolor=black,
+  linkcolor=black,
+  urlcolor=black 
+}
+
+\newlength{\AnchoEncabezados}\setlength{\AnchoEncabezados}{6em}
+\newcommand{\EncabezadoInline}[2]{
+    
+    \setlength{\hangindent}{\tadAnchoEncabezados + \parindent}%
+    
+        \parbox{\AnchoEncabezados}{\textbf{#1}}#2%
+}
+
+\newcommand{\Encabezado}[2]{%
+    \par\EncabezadoInline{#1}{#2}\par%
+}
+
+\newcommand{\funcion}[2]{\textbf{#1}{#2}\BlankLine}
