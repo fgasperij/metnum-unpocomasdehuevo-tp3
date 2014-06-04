@@ -62,7 +62,7 @@ void leerDatosBasicos(const char* file, Data& data)
 	file_s.get();	//Saco el Enter.
 	for(int i = 0 ; i < CANT_POSICIONES; i++){
 		Posicion temp;
-		file_s >> temp.pos_x >> temp.pos_y;
+		file_s >> temp.x >> temp.y;
 		(data.movimientos).push_back(temp);
 		file_s.get();	// Saco el Enter
 	}

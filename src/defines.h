@@ -30,8 +30,8 @@ typedef vector<int> Pos;
 #define BROWNBACK "\033[43m" // fondo marron - letra blanca
 
 struct Posicion{
-	double pos_x;
-	double pos_y;
+	double x;
+	double y;
 };
 
 
@@ -53,7 +53,7 @@ struct Data{
 		cout << "\n LIMITE SUPERIOR:\t" << lim_sup;
 		cout << "\n TRAYECTORIA:\t" << endl;
         for(unsigned int i=0; i < trayectoria.size(); i++){
-            cout << trayectoria[i].pos_x << " " << trayectoria[i].pos_y;
+            cout << trayectoria[i].x << " " << trayectoria[i].y;
             cout << endl;
         }
 		cout<<ENDCOLOR;
@@ -78,5 +78,9 @@ struct Data{
 
 #define FILA 0
 #define COLUMNA 1
+
+/*** Constantes de la canch ***/
+
+#define X_DEL_ARCO 125
 
 #endif

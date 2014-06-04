@@ -1,0 +1,12 @@
+DUDAS
+
+-Si en un instante está en (133, 100) y en el próximo está en (117, 100). El 
+arquero permanece en los dos instante en la posición (125, 100). ¿La atajó o no?
+Es decir, ¿puede suceder que la pelota nunca se describa a una distancia =< 7
+del arquero? 
+-¿El número de posiciones de la trayectoria de la pelota es fijo? ¿24?
+-¿podemos asumir que siempre viene primero lim_inf_arquero y después
+lim_sup_arquero?
+-¿Cómo recibimos la posición de los jugadores rivales?
+
+-Empezamos con t=0 o con t=1? Me parece feo tener toda una fila en la matriz A de 0s
