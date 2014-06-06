@@ -34,6 +34,13 @@ struct Posicion{
 	double y;
 };
 
+struct aproximacion {
+	aproximacion(bool valida, double valor) : valida(valida), valor(valor){};
+	aproximacion(bool valida) : valida(valida) {};
+	bool valida;
+	double valor;
+};
+
 
 struct Data{
 	double mu;		// Desplazamiento maximo
