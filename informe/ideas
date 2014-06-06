@@ -54,3 +54,7 @@ mov4
 ...
 movn
 
+DISTINGUIR LAS INTERVENCIONES DE LOS JUGADORES
+
+Podríamos usar las posiciones de los arqueros como flags que nos indican que hay que testear la condición  x(t) < x(t+1) porque allí probablemente haya que recalcular la trayectoria estimada.
+
