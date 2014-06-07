@@ -25,7 +25,7 @@ double calcularRaiz(vector<double> coeficientes, int metodo = BISECCION) {
 		pair<double,double> res = bisect(bind(eval, coeficientes, _1), a, b, TerminationCondition());
 		return (res.first + res.second)/2;
 	}
-	if (metodo == NEWTON) {		
+	if (metodo == NEWTON) {
 		double min = coeficientes.size()-1, max = min + INTERVALO_BISECCION;
 		double x0 = (min+max)/2;
 		int digits = 10;
@@ -57,4 +57,9 @@ tuple<double,double> evalNewton(vector<double> &coefs, double x) {
 	get<1>(ret) = resDer;
 
 	return ret;
+}
+
+template<class T>
+bool esCero(T& val){
+   return ((-CERO < val) && (val < CERO));
 }

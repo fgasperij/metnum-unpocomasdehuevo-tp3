@@ -54,7 +54,7 @@ class Matriz{
 			public:
 				// Devuelvo posicion (i j) de la matriz, tener cuidado al transponer la matriz.
 				T& operator[](int j){
-					if( matriz_padre->cantColumnas()-1 < j){cerr << "La cantidad de columnas es: " << matriz_padre->cantColumnas() << " , el valor: " << j << " no es válido."; 
+					if( matriz_padre->cantColumnas()-1 < j){cerr << "La cantidad de columnas es: " << matriz_padre->cantColumnas() << " , el valor: " << j << " no es válido.";
 						return (matriz_padre->matriz[0][0]);
 					}
 					if(matriz_padre->transpuesta){
@@ -91,7 +91,7 @@ class Matriz{
            		 vector< vector<T> > m = vector< vector<T> > (cant_filas);
            		 for(int i = 0; i < cant_filas; i++){
                 		m[i] = vector<T> (cant_columnas, val);
-            		}		
+            		}
             		matriz = m;
 			//matriz = crearMatrix(tamanio, tamanio);
 			posiciones_x = crearPosiciones(tamanio);
@@ -158,10 +158,10 @@ class Matriz{
 
 		vector<T> despivotear(vector<T>& v) {
 			vector<T> res(v.size());
-			if (v.size() != cantFilar()){cerr << "Error: Tamaño no coincidente para despivotear" << endl; return res;}
+			if ((int) v.size() != cantFilas()){cerr << "Error: Tamaño no coincidente para despivotear" << endl; return res;}
 			// posiciones_x
 			for (int i = 0; i < cantFilas(); i++) {
-				res[posiciones_x[i]] = v[i]; 	
+				res[posiciones_x[i]] = v[i];
 			}
 
 			return res;
@@ -179,20 +179,8 @@ class Matriz{
 			return res;
 		}
 
-		// Producto entre una matriz y un vector, devuelva un vector.
-		vector<T> operator*(vector<T>& b){
-			if(this->cantColumnas() != b.size()){cerr << "Error: Tamaño no coincidente para el producto" << endl; return vector<T> res;}
-			vector<T> res;
-			for(int i = 0; i < this->cantFilas();i++){
-				T prod = 0;
-				for(int j = 0; j < b.size(); j++){
-					prod += b[j] * A[i][j];
-				}
-				res.push_back(prod);
-			}
-			return res;
-		}
-		
+
+
 		// Multiplicar matriz por escalar. Modifica matriz original.
 		void operator*(T valor){
 			for(int i = 0; i < this->cantFilas();i++){
@@ -202,7 +190,7 @@ class Matriz{
 			}
 			//this->escalar = valor;
 		}
-		
+
 		// Suma matriz por escalar. Modifica matriz original.
 		void operator+(T valor){
 			for(int i = 0; i < this->cantFilas();i++){
@@ -214,7 +202,7 @@ class Matriz{
 		}
 
 		// Transponer la matriz es cambiar un booleano. Modifica la matriz.
-		void transponer(){	
+		void transponer(){
 			this->transpuesta = !(this->transpuesta);
 		}
 

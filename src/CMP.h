@@ -3,8 +3,9 @@
 
 #include "defines.h"
 #include <iostream>
+#include "Matriz.h"
 
-vector<double> minimizarConGrado(vetor<double> xs, int grado);
+vector<double> minimizarConGrado(vector<double> xs, int grado);
 
 
 // RESOLVER EL SISTEMA
@@ -13,3 +14,5 @@ void gaussInf(Matriz<T>& A, vector<T>& b);
 
 template<class T>
 void backSubst(Matriz<T>& A, vector<T>& b, vector<T>& res);
+
+#endif

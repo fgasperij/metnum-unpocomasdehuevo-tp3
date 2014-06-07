@@ -16,7 +16,7 @@ class Disparo{
 		/**
 		 * Recibe la trayectoria completa del disparo.
 		 */
-		Disparo(vector<Posicion> trayectoria) 
+		Disparo(vector<Posicion> trayectoria)
 		: trayectoria(trayectoria), instanteActual(0), flag_test(false), CMPdisparo(CMP()) {}
 		/**
 		 * Aumenta el instanteActual en 1, el disparo avanza una unidad de
@@ -38,11 +38,11 @@ class Disparo{
 		/**
 		 * Devuelve la trayectoria del disparo hasta el instanteActual.
 		 */
-		vector<Posicion> trayectoria();
+		vector<Posicion> devolverTrayectoria();
 		/**
-		 * Devuelve true si no le queda más trayectoria por recorrer.		 
+		 * Devuelve true si no le queda más trayectoria por recorrer.
 		 */
-		bool detenido();		
+		bool detenido();
 
 		void setearFlagTest(bool);
 

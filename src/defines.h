@@ -37,6 +37,7 @@ struct Posicion{
 struct aproximacion {
 	aproximacion(bool valida, double valor) : valida(valida), valor(valor){};
 	aproximacion(bool valida) : valida(valida) {};
+    aproximacion(double valor) : valor(valor) {};
 	bool valida;
 	double valor;
 };
@@ -97,5 +98,13 @@ struct Data{
 /*** Constantes de la canch ***/
 
 #define X_DEL_ARCO 125
+
+// Valor nulo flotante
+#define CERO 1e-16
+
+//Tipo de triangulacion, superior o inferior
+
+#define SUP 1
+#define INF 0
 
 #endif
