@@ -156,6 +156,17 @@ class Matriz{
 			return acum;
 		}
 
+		vector<T> despivotear(vector<T>& v) {
+			vector<T> res(v.size());
+			if (v.size() != cantFilar()){cerr << "Error: Tamaño no coincidente para despivotear" << endl; return res;}
+			// posiciones_x
+			for (int i = 0; i < cantFilas(); i++) {
+				res[posiciones_x[i]] = v[i]; 	
+			}
+
+			return res;
+		}
+
 		// Producto entre dos matrices, devuelva una nueva matriz.
 		Matriz<T> operator*(Matriz<T>& B){
 			if(this->cantColumnas() != B.cantFilas()){cerr << "Error: Tamaño no coincidente para el producto" << endl; return (Matriz<T> (0,0));}
@@ -164,6 +175,20 @@ class Matriz{
 				for(int j = 0; j < B.cantColumnas(); j++){
 					res[i][j] = calcularProducto(*this,B,i,j);
 				}
+			}
+			return res;
+		}
+
+		// Producto entre una matriz y un vector, devuelva un vector.
+		vector<T> operator*(vector<T>& b){
+			if(this->cantColumnas() != b.size()){cerr << "Error: Tamaño no coincidente para el producto" << endl; return vector<T> res;}
+			vector<T> res;
+			for(int i = 0; i < this->cantFilas();i++){
+				T prod = 0;
+				for(int j = 0; j < b.size(); j++){
+					prod += b[j] * A[i][j];
+				}
+				res.push_back(prod);
 			}
 			return res;
 		}
