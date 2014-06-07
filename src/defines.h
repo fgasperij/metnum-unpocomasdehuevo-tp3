@@ -67,6 +67,14 @@ struct Data{
 	}
 };
 
+/**** CÁLCULO DE RAÍCES CON BOOST ****/
+#define EPS 10e-5
+#define X_DEL_ARCO 125
+#define BISECCION 1
+#define NEWTON 2
+#define INTERVALO_BISECCION 100
+#define DIGITS_NEWTON 10
+
 
 // Precicion decimal para la salida
 #define PRECISION 6

@@ -33,7 +33,7 @@ double Disparo::estimarPorDondePasa() {
 	 *    	Aproximo con grado 0 y 1. Grado 2 ya me daría un interpolador.
 	 */
 	int grados = trayectoriaActual.size()-1;
-	double aproximaciones[grados]; 
+	vector<aproximacion> aproximaciones(grados); 
 
 	for (int i = 0; i < grados; i++) {
 		vector<double> xs = obtenerXs(trayectoriaActual);	
@@ -42,12 +42,11 @@ double Disparo::estimarPorDondePasa() {
 		double ys = obtenerYs(trayectoriaActual);	
 		double coeficientesMinimizadoresYs = minimizarConGrado(ys, i);
 		
-		Polinomio polinomioMinimizadorX (coeficientesMinimizadoresXs);
-		Polinomio polinomioMinimizadorY (coeficientesMinimizadoresXs);
+		coeficientesMinimizadoresXs[0] -= X_DEL_ARCO;
+		// BISECCION | NEWTON
+		double tiempoGol = calcularRaiz(coeficientesMinimizadoresXs, BISECCION);
 
-		double tiempoGol = boostGetRoot(polinomioMinimizadorX - X_DEL_ARCO);
-
-		aproximaciones[i] = polinomioMinimizadorY.evaluar(tiempoGol);
+		aproximaciones[i] = eval(coeficientesMinimizadoresYs, tiempoGol);
 	}
 	
 	double aproximacionFinal = decidirEnBaseATodasLasAproximaciones(aproximaciones);
