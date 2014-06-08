@@ -2,6 +2,7 @@
 #define MATRIZ_H
 
 #include "defines.h"
+#include "m_aux.h"
 #include <vector>
 
 /*** Definicion del tipo Matriz ***/
@@ -19,14 +20,7 @@ vector< vector<T> > crearMatrix(int cant_filas, int cant_columnas){
 		return m;
 }
 
-// Crea vector tal que vec[i] = i;
-vector<int> crearPosiciones(int cant_filas){
-	vector<int> p = vector<int> (cant_filas);
-	for(int i = 0; i < cant_filas; i++){
-		p[i] = i;
-	}
-	return p;
-}
+
 
 // El siguiente tipo matriz es una matriz comun y corriente, con la unica diferencia que guardo
 // rastro de los intercambios de fila y columna con ayuda de un vector de manera de poder intercambiar filas
@@ -40,8 +34,8 @@ template<class T>
 class Matriz{
 	private:
 		vector< vector<T> > matriz; //Matriz "fisica" donde se guardan los datos.
-		Pos posiciones_x; //Pos_x[i] = Numero de fila de la matriz anterior que se encuentra en la posicion i.
-		Pos posiciones_y; //Pos_y[i] = Numero de columna de la matriz anterior que se encuentra en la posicion i.
+		vector<int> posiciones_x; //Pos_x[i] = Numero de fila de la matriz anterior que se encuentra en la posicion i.
+		vector<int> posiciones_y; //Pos_y[i] = Numero de columna de la matriz anterior que se encuentra en la posicion i.
 		// Atributos alternativos para sumar y multiplicar escalares.
 		T escalar;
 		T sumando;

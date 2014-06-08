@@ -1,6 +1,5 @@
 #include "Disparo.h"
 #include "CMP.h"
-#include "misc.h"
 #include "zeros.h"
 
 void Disparo::tic(){instanteActual++;}

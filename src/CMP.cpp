@@ -1,6 +1,7 @@
 #include "CMP.h"
 #include <math.h>
 #include <assert.h>
+#include "Matriz.h"
 #include "misc.h"
 #include "zeros.h"
 

@@ -7,9 +7,8 @@
 #include <fstream>
 #include "defines.h"
 #include "util.h"
-#include "io.h"
-#include "misc.h"
 #include "Disparo.h"
+#include "io.h"
 #include "Arquero.h"
 #include "signal.h"
 
@@ -17,7 +16,7 @@ int main(int argc, char **argv)
 {
 
 	// MANEJAR SI EL PROGRAMA FUE LLAMADO DE MANERA INCORRECTA
-
+    if(argc != 2){cerr << "Cantidad de parametros incorrecta " ;return 0;}
 	char * file_in = argv[1];
 	/*** Para evitar que se cambie el color al salir con Ctrl+C u otros ***/
 	struct sigaction sigIntHandler;

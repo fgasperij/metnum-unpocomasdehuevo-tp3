@@ -8,7 +8,6 @@
 
 using namespace std;
 
-typedef vector<int> Pos;
 
 /** Para medir tiempo de ejecución **/
 #define TIMER(var) clock_gettime(CLOCK_REALTIME, &var);

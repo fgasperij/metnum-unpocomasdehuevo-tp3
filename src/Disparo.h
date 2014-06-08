@@ -2,8 +2,7 @@
 #define DISPARO_H
 
 #include "defines.h"
-#include "CMP.h"
-#include <iostream>
+
 
 /**
  * Simula el disparo de una pelota. El disparo es modelado como una secuencia

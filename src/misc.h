@@ -2,14 +2,8 @@
 #define MISC_H
 
 #include <cmath>
-#include "boost/math/tools/roots.hpp"
-#include "boost/tuple/tuple.hpp"
-#include <boost/bind.hpp>
 #include "Matriz.h"
 #include "defines.h"
-
-using namespace std;
-using namespace boost::math::tools;
 
 
 template<class T>

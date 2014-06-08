@@ -57,10 +57,9 @@ void leerDatosBasicos(const char* file, Data& data)
 {
 	ifstream file_s; file_s.open(file);
 	data.trayectoria = vector<Posicion> (0);
-	int n;
 	file_s >> data.pos_arq >> data.lim_inf >> data.lim_sup >> data.mu;
 	file_s.get();	//Saco el Enter.
-	for(int i = 0 ; i < n; i++){
+	while(file_s.good()){
 		Posicion temp;
 		file_s >> temp.x >> temp.y;
 		(data.trayectoria).push_back(temp);
