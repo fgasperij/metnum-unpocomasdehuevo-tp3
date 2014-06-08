@@ -37,6 +37,7 @@ struct aproximacion {
 	aproximacion(){};
 	aproximacion(bool valida, double valor) : valida(valida), valor(valor){};
 	aproximacion(bool valida) : valida(valida) {};
+    aproximacion(double valor) : valida(true), valor(valor) {};
 	bool valida;
 	double valor;
 };

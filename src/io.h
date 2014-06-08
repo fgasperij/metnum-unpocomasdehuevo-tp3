@@ -49,8 +49,6 @@ void obtenerHastaCaracter(ifstream& ifs, char * buffer, char c)
 	ifs.get(buffer, std::numeric_limits<std::streamsize>::max(), c);
 }
 
-
-
 int contarLineas(const char* file){
     ifstream file_s; file_s.open(file);
     int cant_lineas = 0;
@@ -59,7 +57,7 @@ int contarLineas(const char* file){
         cant_lineas++;
     }
     file_s.close();
-    return cant_lineas;
+    return cant_lineas-1;
 }
 
 
@@ -68,8 +66,10 @@ void leerDatosBasicos(const char* file, Data& data)
 {
     int cant_lineas = contarLineas(file);
 	ifstream file_s; file_s.open(file);
+	file_s >> data.pos_arq >> data.lim_inf >> data.lim_sup >> data.mu;
 	data.trayectoria = vector<Posicion> (0);
 	file_s.get();	//Saco el Enter.
+	cant_lineas--;
 	for(int i=0; i < cant_lineas; i++){
 		Posicion temp;
 		file_s >> temp.x >> temp.y;

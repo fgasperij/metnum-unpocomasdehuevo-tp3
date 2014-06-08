@@ -11,6 +11,7 @@ bool esCero(T& val){
    return ((-CERO < val) && (val < CERO));
 }
 
+
 template<class T>
 vector<T> matrizAVector(Matriz<T>& A){
     int cantFilas = A.cantFilas();

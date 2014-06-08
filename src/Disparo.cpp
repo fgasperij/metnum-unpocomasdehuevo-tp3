@@ -8,7 +8,6 @@ void Disparo::reset(){instanteActual = 0;}
 
 void Disparo::setearFlagTest(bool value){flag_test = value;}
 
-/** CORREGIR ESTO */
 vector<Posicion> Disparo::devolverTrayectoria() {
 	vector<Posicion> trayectoriaActual;
 
@@ -58,14 +57,26 @@ double Disparo::estimarPorDondePasa() {
 
 		coeficientesMinimizadoresXs[0] -= X_DEL_ARCO;
 		// BISECCION | NEWTON
-//		double tiempoGol = calcularRaiz(coeficientesMinimizadoresXs, BISECCION);
-//
-//		aproximaciones[i] = eval(coeficientesMinimizadoresYs, tiempoGol);
+		try{
+            double tiempoGol = calcularRaiz(coeficientesMinimizadoresXs, BISECCION);
+            aproximaciones[i] = aproximacion (eval(coeficientesMinimizadoresYs, tiempoGol));
+		}
+		catch(...){
+            aproximaciones[i] = aproximacion(false, 0);
+		}
 	}
 
-/** ATENCION: DESCOMENTAR ESTO */
 //	double aproximacionFinal = decidirEnBaseATodasLasAproximaciones(aproximaciones);
 
-//	return aproximacionFinal;
-    return 0;
+// Por el momento me quedo con la ultima aproximacion valida.
+    double aproximacionFinal = 0;
+	for(unsigned int i = 0; i < aproximaciones.size(); i++){
+        if(aproximaciones[i].valida){
+            aproximacionFinal = aproximaciones[i].valor;
+        }
+	}
+
+
+	return aproximacionFinal;
+
 }
