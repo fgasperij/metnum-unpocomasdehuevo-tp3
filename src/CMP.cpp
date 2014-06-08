@@ -44,9 +44,9 @@ vector<double> minimizarConGrado(vector<double> mediciones, int grado) {
 	Matriz<double> proyeccionBSobreAMatrix = ATranspuesta*bMatriz;
 	vector<double> proyeccionBSobreA = matrizAVector(proyeccionBSobreAMatrix);
 
-	gaussInf(A, proyeccionBSobreA);
+	gaussInf(C, proyeccionBSobreA);
 	vector<double> coeficientesPivoteados (proyeccionBSobreA.size());
-	backSubst(A, b, coeficientesPivoteados);
+	backSubst(C, b, coeficientesPivoteados);
 
 	vector<double> coeficientes = A.despivotear(coeficientesPivoteados);
 
