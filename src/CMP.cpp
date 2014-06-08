@@ -48,9 +48,9 @@ vector<double> minimizarConGrado(vector<double>& mediciones, int grado) {
 	vector<double> coeficientesPivoteados (proyeccionBSobreA.size());
 	backSubst(C, b, coeficientesPivoteados);
 
-	//vector<double> coeficientes = A.despivotear(coeficientesPivoteados);
+	vector<double> coeficientes = C.despivotear(coeficientesPivoteados);
 
-	return coeficientesPivoteados;
+	return coeficientes;
 
 }
 
