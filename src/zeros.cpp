@@ -1,4 +1,7 @@
 #include "zeros.h"
+#include "boost/tuple/tuple.hpp"
+#include <boost/bind.hpp>
+
 
 vector<double> obtenerXs(vector<Posicion>& trayectoria){
 	vector<double> res;
@@ -18,22 +21,21 @@ vector<double> obtenerYs(vector<Posicion>& trayectoria){
 	return res;
 }
 
-double calcularRaiz(vector<double>& coeficientes, int met) {
-	int metodo = met;
+double calcularRaiz(vector<double>& coeficientes, int metodo) {
 	if (metodo == BISECCION) {
-		double a = coeficientes.size()-1;
+		double a = 0;
 		double b = a + INTERVALO_BISECCION;
 		pair<double,double> res = bisect(bind(eval, coeficientes, _1), a, b, TerminationCondition());
 		return (res.first + res.second)/2;
 	}
-	/*
+
 	if (metodo == NEWTON) {
 		double min = coeficientes.size()-1, max = min + INTERVALO_BISECCION;
 		double x0 = (min+max)/2;
 		int digits = 10;
 		return newton_raphson_iterate(bind(evalNewton, coeficientes, _1), x0, min, max, digits);
 	}
-	*/
+
 	return 0;
 }
 
@@ -45,8 +47,8 @@ double eval(vector<double> &coefs, double x) {
 	return res;
 }
 
-boost::tuple<double,double> evalNewton(vector<double> &coefs, double x) {
-	boost::tuple<double,double> ret;
+tuple<double,double> evalNewton(vector<double> &coefs, double x) {
+	tuple<double,double> ret;
 
 	double resPol = coefs[0];
 	for(unsigned int i = 1; i < coefs.size(); ++i) {
