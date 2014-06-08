@@ -51,19 +51,29 @@ void obtenerHastaCaracter(ifstream& ifs, char * buffer, char c)
 
 
 
+int contarLineas(const char* file){
+    ifstream file_s; file_s.open(file);
+    int cant_lineas = 0;
+    while(file_s.good()){
+        ignorarLineas(file_s);
+        cant_lineas++;
+    }
+    file_s.close();
+    return cant_lineas;
+}
+
 
 //Lee los datos basios del archivo. La primer linea.
 void leerDatosBasicos(const char* file, Data& data)
 {
+    int cant_lineas = contarLineas(file);
 	ifstream file_s; file_s.open(file);
 	data.trayectoria = vector<Posicion> (0);
-	file_s >> data.pos_arq >> data.lim_inf >> data.lim_sup >> data.mu;
 	file_s.get();	//Saco el Enter.
-	while(file_s.good()){
+	for(int i=0; i < cant_lineas; i++){
 		Posicion temp;
 		file_s >> temp.x >> temp.y;
 		(data.trayectoria).push_back(temp);
-		file_s.get();	// Saco el Enter
 	}
 
 	file_s.close();
