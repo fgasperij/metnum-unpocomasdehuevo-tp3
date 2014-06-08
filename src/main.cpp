@@ -34,6 +34,7 @@ int main(int argc, char **argv)
 	Disparo disparo = Disparo(data.trayectoria);
 	Arquero higuita = Arquero("Higuita", data.lim_inf, data.lim_sup, data.mu, data.pos_arq);
 
+
 	while(!disparo.detenido()){
 		disparo.tic();
 		higuita.atajar(disparo.estimarPorDondePasa());

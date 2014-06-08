@@ -1,6 +1,6 @@
 #include "zeros.h"
 
-vector<double> obtenerXs(vector<Posicion> trayectoria){
+vector<double> obtenerXs(vector<Posicion>& trayectoria){
 	vector<double> res;
 	for(unsigned i = 0; i < trayectoria.size(); ++i) {
 		res.push_back(trayectoria[i].x);
@@ -9,7 +9,7 @@ vector<double> obtenerXs(vector<Posicion> trayectoria){
 	return res;
 }
 
-vector<double> obtenerYs(vector<Posicion> trayectoria){
+vector<double> obtenerYs(vector<Posicion>& trayectoria){
 	vector<double> res;
 	for(unsigned i = 0; i < trayectoria.size(); ++i) {
 		res.push_back(trayectoria[i].y);
@@ -18,7 +18,7 @@ vector<double> obtenerYs(vector<Posicion> trayectoria){
 	return res;
 }
 
-double calcularRaiz(vector<double> coeficientes, int met) {
+double calcularRaiz(vector<double>& coeficientes, int met) {
 	int metodo = met;
 	if (metodo == BISECCION) {
 		double a = coeficientes.size()-1;

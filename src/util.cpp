@@ -4,8 +4,8 @@
 /*** Mensajes pantalla ***/
 
 void my_handler(int s){
-           std::cout<<ENDCOLOR<<std::endl;
-           exit(0); 
+           std::cout<<ENDCOLOR<<std::endl << std::flush;
+           exit(0);
 
 }
 
@@ -26,7 +26,7 @@ void msg_parseo_falla(std::string msg)
 }
 
 void msg_modo_uso()
-{	
+{
 	std::cout<<MAGENTA;
 	std::cout << "\n MODO DE USO:"<< std::endl;
 	std::cout << "\n ./tp2 <archivo entrada> <archivo salida> <m>" << std::endl;

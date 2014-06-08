@@ -12,8 +12,8 @@
  *
  * @return result[i] = a_i los coeficientes del polinomio
  */
-vector<double> minimizarConGrado(vector<double> mediciones, int grado) {
-	assert(grado < (int) (mediciones.size()-2)); // no usamos el polinomio interpolador
+vector<double> minimizarConGrado(vector<double>& mediciones, int grado) {
+	assert(grado < (int) (mediciones.size())); // no usamos el polinomio interpolador
 
 	int cantidadMediciones = mediciones.size();
 	Matriz<double> A(cantidadMediciones, grado+1);
@@ -48,9 +48,9 @@ vector<double> minimizarConGrado(vector<double> mediciones, int grado) {
 	vector<double> coeficientesPivoteados (proyeccionBSobreA.size());
 	backSubst(C, b, coeficientesPivoteados);
 
-	vector<double> coeficientes = A.despivotear(coeficientesPivoteados);
+	//vector<double> coeficientes = A.despivotear(coeficientesPivoteados);
 
-	return coeficientes;
+	return coeficientesPivoteados;
 
 }
 

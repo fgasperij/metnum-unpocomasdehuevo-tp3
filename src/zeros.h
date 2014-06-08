@@ -15,10 +15,10 @@ struct TerminationCondition {
 	}
 };
 
-vector<double> obtenerXs(vector<Posicion> trayectoria);
-vector<double> obtenerYs(vector<Posicion> trayectoria);
+vector<double> obtenerXs(vector<Posicion>& trayectoria);
+vector<double> obtenerYs(vector<Posicion>& trayectoria);
 
-double calcularRaiz(vector<double> coeficientes, int metodo = BISECCION);
+double calcularRaiz(vector<double>& coeficientes, int metodo = BISECCION);
 double eval(vector<double> &coefs, double x);
 boost::tuple<double,double> evalNewton(vector<double> &coefs, double x);
 

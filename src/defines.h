@@ -63,7 +63,7 @@ struct Data{
             cout << trayectoria[i].x << " " << trayectoria[i].y;
             cout << endl;
         }
-		cout<<ENDCOLOR;
+		cout<<ENDCOLOR << flush;
 	}
 };
 
