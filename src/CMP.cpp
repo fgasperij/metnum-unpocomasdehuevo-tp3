@@ -1,8 +1,9 @@
 #include "CMP.h"
-#include "Matriz.h"
 #include <math.h>
 #include <assert.h>
 #include "misc.h"
+#include "zeros.h"
+
 
 /**
  * @param mediciones mediciones[i] = x(i) ==> el valor de x en el instante i
@@ -22,7 +23,7 @@ vector<double> minimizarConGrado(vector<double> mediciones, int grado) {
 				A[i][j] = 1;
 			} else {
 				// los t_i son discretos entonces son 0,1,2,3,..,cantidadMediciones
-				A[i][j] = pow(i, grado-j);
+				A[i][j] = (double) pow((double) i, grado-j);
 			}
 		}
 	}

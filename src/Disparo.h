@@ -17,7 +17,7 @@ class Disparo{
 		 * Recibe la trayectoria completa del disparo.
 		 */
 		Disparo(vector<Posicion> trayectoria)
-		: trayectoria(trayectoria), instanteActual(0), flag_test(false), CMPdisparo(CMP()) {}
+		: trayectoria(trayectoria), instanteActual(0), flag_test(false) {}
 		/**
 		 * Aumenta el instanteActual en 1, el disparo avanza una unidad de
 		 * tiempo.

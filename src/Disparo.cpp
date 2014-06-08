@@ -1,6 +1,7 @@
 #include "Disparo.h"
 #include "CMP.h"
 #include "misc.h"
+#include "zeros.h"
 
 void Disparo::tic(){instanteActual++;}
 
@@ -12,7 +13,7 @@ void Disparo::setearFlagTest(bool value){flag_test = value;}
 vector<Posicion> Disparo::devolverTrayectoria() {
 	vector<Posicion> trayectoriaActual (instanteActual);
 	for(int i = 0; i <= instanteActual; i++) {
-		vector.push_back(trayectoria[i]);
+		trayectoriaActual.push_back(trayectoria[i]);
 	}
 
 	return trayectoriaActual;
@@ -39,10 +40,10 @@ double Disparo::estimarPorDondePasa() {
 
 	for (int i = 0; i < grados; i++) {
 		vector<double> xs = obtenerXs(trayectoriaActual);
-		double coeficientesMinimizadoresXs = minimizarConGrado(xs, i);
+		vector<double> coeficientesMinimizadoresXs = minimizarConGrado(xs, i); // double x vector<double>
 
-		double ys = obtenerYs(trayectoriaActual);
-		double coeficientesMinimizadoresYs = minimizarConGrado(ys, i);
+		vector<double> ys = obtenerYs(trayectoriaActual); // double x vector<double>
+		vector<double> coeficientesMinimizadoresYs = minimizarConGrado(ys, i); // double x vector<double>
 
 		coeficientesMinimizadoresXs[0] -= X_DEL_ARCO;
 		// BISECCION | NEWTON

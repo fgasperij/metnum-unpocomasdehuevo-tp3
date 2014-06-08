@@ -20,8 +20,8 @@ vector< vector<T> > crearMatrix(int cant_filas, int cant_columnas){
 }
 
 // Crea vector tal que vec[i] = i;
-Pos crearPosiciones(int cant_filas){
-	Pos p = Pos (cant_filas);
+vector<int> crearPosiciones(int cant_filas){
+	vector<int> p = vector<int> (cant_filas);
 	for(int i = 0; i < cant_filas; i++){
 		p[i] = i;
 	}
