@@ -1,11 +1,11 @@
 #include "Arquero.h"
 
 void Arquero::atajar(double posicionEntrada){
-	if ( posicionEntrada > (posicionActual+mu) )
+	if ( posicionEntrada > (posicionActual+amplitudMovimiento) )
 	{
-		posicionActual+=mu;
-	}elseif (posicionEntrada < (posicionActual-mu) )
+		posicionActual+=amplitudMovimiento;
+	}elseif (posicionEntrada < (posicionActual-amplitudMovimiento) )
 	{
-		posicionActual-=mu;
+		posicionActual-=amplitudMovimiento;
 	}
 }
