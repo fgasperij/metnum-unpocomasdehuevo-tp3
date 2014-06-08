@@ -25,5 +25,5 @@ void Arquero::atajar(double posicionEntrada){
 		desplazamiento=-(posicionPrevia-posicionActual);
 		
 	//return desplazamiento;
-	// o bien: movimientos(push_back,desplazamiento);
+	// o bien: movimientos.push_back(desplazamiento);
 }
