@@ -98,7 +98,7 @@ void escribirVectorS(ofstream& os, const vector<T>& b, int modo = VERT){
 
 template<class T>
 void escribirVector(const char*  file, const vector<T>& b, int modo = VERT){
-	ofstream file_s; file_s.open(file, fstream::app);
+	ofstream file_s; file_s.open(file);
 	setearPrecision(file_s, PRECISION);
 	escribirVectorS(file_s, b, modo);
 	file_s.close();
