@@ -100,6 +100,7 @@ struct Data{
 /*** Constantes de la canch ***/
 
 #define X_DEL_ARCO 125
+#define RADIO_ATAJADA 7
 
 // Valor nulo flotante
 #define CERO 1e-16

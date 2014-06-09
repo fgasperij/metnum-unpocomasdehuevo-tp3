@@ -8,17 +8,20 @@ void Arquero::atajar(double posicionEntrada){
 	if ( posicionEntrada > (posicionActual+amplitudMovimiento) )
 	{
 		posicionActual+=amplitudMovimiento;
-		if (posicionActual>limiteSuperior)
-			posicionActual=limiteSuperior;
+
 	}else if (posicionEntrada < (posicionActual-amplitudMovimiento) )
 	{
 		posicionActual-=amplitudMovimiento;
-		if (posicionActual<limiteInferior)
-			posicionActual=limiteInferior;
-	}else 
+	}else // Si está al alcance
 	{
-		// Si la pelota está al alcance del arquero, podríamos acercarnos al punto de entrada
+		posicionActual=posicionEntrada;
 	}
+
+	if (posicionActual>limiteSuperior)
+		posicionActual=limiteSuperior-RADIO_ATAJADA;
+	if (posicionActual<limiteInferior)
+		posicionActual=limiteInferior+RADIO_ATAJADA;
+			
 	// Calculo cuál fue el desplazamiento
 	if (posicionActual>posicionPrevia)
 		desplazamiento=posicionActual-posicionPrevia;
