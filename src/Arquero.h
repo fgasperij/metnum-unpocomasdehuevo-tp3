@@ -18,7 +18,8 @@ class Arquero{
 		 * ideal para atajar el disparo.
 		 * @param Posicion lugar por el que pasa la pelota
 		 */
-		int atajar(double posicion);
+		void atajar(double posicion);
+		vector<int> devolverMovimientos();
 
 	private:
 		/**
@@ -26,6 +27,7 @@ class Arquero{
 		 * sucesivas llamadas a atajar().
 		 */
 		vector<double> movimientos;
+		vector<double> estimaciones;
         string nombre;
 		double limiteInferior;
 		double limiteSuperior;

@@ -223,4 +223,33 @@ vector<T> calcRaicesPoli(vector<T>& coeficientes){
 	return raices;
 }
 
+// Promedio de un vector, si tiene tamanio 0, devuelve 0.
+template<class T>
+T calcularPromedio(const vector<T>& vec){
+    unsigned int tamanio = vec.size();
+    if(tamanio == 0){return 0;}
+    T acum = 0;
+    for(unsigned int i = 0; i < tamanio; i++){
+        acum += vec[i];
+    }
+    return acum/tamanio;
+}
+
+// Promedio ponderado dede un vector, si tiene tamanio 0 o los cantidad de ponderaciones es distinta a la cantidad de elementos, o la suma
+// de las ponderaciones es 0, devuelve 0.
+template<class T>
+T calcularPromedio(const vector<T>& vec, const vector<T>& ponderaciones){
+    if(ponderaciones.size() != vec.size()){cerr << "calcularPromedioPonderado: Tamaños no coincidentes";return 0;}
+    unsigned int tamanio = vec.size();
+    if(tamanio == 0){return 0;}
+    T acum = 0;
+    T pesos = 0;
+    for(unsigned int i = 0; i < tamanio; i++){
+        acum += vec[i]*ponderaciones[i];
+        pesos += ponderaciones[i];
+    }
+    if(pesos == 0){return 0;}
+    return acum/pesos;
+}
+
 #endif
