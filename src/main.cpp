@@ -30,7 +30,6 @@ int main(int argc, char **argv)
 
 	Data data;
 	leerDatosBasicos(file_in, data);
-    data.show_info();
 
 	Disparo disparo = Disparo(data.trayectoria);
 	Arquero higuita = Arquero("Higuita", data.lim_inf, data.lim_sup, data.mu, data.pos_arq);
@@ -38,11 +37,11 @@ int main(int argc, char **argv)
 	// Movimientos del arquero.
 	while(!disparo.detenido()){
 		disparo.tic();
-		higuita.atajar(disparo.estimarPorDondePasa();
+		higuita.atajar(disparo.estimarPorDondePasa());
 	}
 
 	// Resultado
-    escribirVector(file_out, higuita.devolverMovimientos);
+    escribirVector(file_out, higuita.devolverMovimientos());
 
 	msg_footer();
 

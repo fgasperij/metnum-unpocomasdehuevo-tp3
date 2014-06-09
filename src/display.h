@@ -26,8 +26,8 @@ void mostrarMatriz( Matriz<T>& A){
 }
 
 template<class T>
-void mostrarVector( vector<T>& v){
-	escribirVectorS(cout, v);
+void mostrarVector( vector<T>& v, int modo = VERT){
+	escribirVectorS(cout, v, modo);
 }
 
 

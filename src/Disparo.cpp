@@ -2,6 +2,7 @@
 #include "CMP.h"
 #include "zeros.h"
 #include "display.h"
+#include "io.h"
 
 
 void Disparo::tic(){instanteActual++;}
@@ -21,7 +22,7 @@ vector<Posicion> Disparo::devolverTrayectoria() {
 }
 
 bool Disparo::detenido() {
-	return instanteActual > (int) trayectoria.size();
+	return instanteActual > (int) trayectoria.size()-1;
 }
 
 double Disparo::estimarPorDondePasa() {
@@ -38,12 +39,12 @@ double Disparo::estimarPorDondePasa() {
 	 */
 
 	// Cantidad de puntos medidos hasta el instante actual.
-	int cantPuntosActuales = trayectoriaActual.size();
+	unsigned int cantPuntosActuales = trayectoriaActual.size();
 
 	// En el primer instante devuelvo lo mismo.
-    if(cantPuntosActuales == 1){return trayectoria[0].y;}
+    //if(cantPuntosActuales == 1){return trayectoria[0].y;}
 
-    int grados = 2;    // Uso polinomios de hasta grado 2.
+    unsigned int grados = 3;    // Uso polinomios de hasta grado 2.
 
     // Las aproximaciones para los distintos polinomios.
 	vector<aproximacion> aproximaciones(grados+1);
@@ -51,12 +52,24 @@ double Disparo::estimarPorDondePasa() {
 	vector<double> xs = obtenerXs(trayectoriaActual);
     vector<double> ys = obtenerYs(trayectoriaActual);
 
+    // Me quedo con la ultima seria de mediciones crecientes.
+    vector<double> aux = xs;
+    reverse(aux.begin(), aux.end());
+    vector<double> xsp;
+    for(unsigned int i = 0; i < aux.size() ; i++){
+        if(i+1 < aux.size() && aux[i] <= aux[i+1] ){
+            xsp.push_back(aux[i]);
+        }
+        else if(i+1 == aux.size()){xsp.push_back(aux[i]);}
+        else{break;}
+    }
+    reverse(xsp.begin(), xsp.end());
 
-    // Con grado 0, la aproximacion es constante. Muy poco util.
+    // Con grado 0, la aproximacion es constante. Muy poco util. Aunque cuando hay un solo punto a considerar quizas sea lo mejor.
     aproximaciones[0] = ys[ys.size()-1];
     // El resto de las aproximaciones hasta polinomios de hasta grado grados. El grado maximo tambien queda definido
     // por la cantidad de puntos actuales.
-	for (int i = 1; i <= grados && i < cantPuntosActuales; i++) {
+	for (unsigned int i = 1; i <= grados && i < cantPuntosActuales && i < xsp.size(); i++) {
 
         // Esta cosa fea es para que solo considere los ultimos puntos, invierto, me quedo con los primeros y vuelvo a invertir.
         vector<double> xss = xs;
