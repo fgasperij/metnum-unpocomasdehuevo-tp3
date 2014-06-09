@@ -53,7 +53,7 @@ double Disparo::estimarPorDondePasa() {
 
 
     // Con grado 0, la aproximacion es constante. Muy poco util.
-    aproximaciones[0] = xs[xs.size()-1];
+    aproximaciones[0] = ys[ys.size()-1];
     // El resto de las aproximaciones hasta polinomios de hasta grado grados. El grado maximo tambien queda definido
     // por la cantidad de puntos actuales.
 	for (int i = 1; i <= grados && i < cantPuntosActuales; i++) {
