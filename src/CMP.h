@@ -3,7 +3,7 @@
 
 #include "defines.h"
 
-vector<double> minimizarConGrado(vector<double>& xs, int grado);
+vector<double> minimizarConGrado(vector<double>& xs, int grado, int tiempo);
 
 
 

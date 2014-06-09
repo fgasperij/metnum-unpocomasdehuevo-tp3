@@ -18,7 +18,7 @@ class Arquero{
 		 * ideal para atajar el disparo.
 		 * @param Posicion lugar por el que pasa la pelota
 		 */
-		void atajar(double posicion);
+		int atajar(double posicion);
 
 	private:
 		/**

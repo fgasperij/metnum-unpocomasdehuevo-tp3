@@ -2,8 +2,10 @@
 #include <math.h>
 #include <assert.h>
 #include "Matriz.h"
+#include "io.h"
 #include "misc.h"
 #include "zeros.h"
+
 
 
 /**
@@ -12,7 +14,7 @@
  *
  * @return result[i] = a_i los coeficientes del polinomio
  */
-vector<double> minimizarConGrado(vector<double>& mediciones, int grado) {
+vector<double> minimizarConGrado(vector<double>& mediciones, int grado, int tiempo) {
 	assert(grado < (int) (mediciones.size())); // no usamos el polinomio interpolador
 
 	int cantidadMediciones = mediciones.size();
@@ -24,13 +26,14 @@ vector<double> minimizarConGrado(vector<double>& mediciones, int grado) {
 				A[i][j] = 1;
 			} else {
 				// los t_i son discretos entonces son 0,1,2,3,..,cantidadMediciones
-				A[i][j] = (double) pow((double) i, grado-j);
+				A[i][j] = pow(tiempo+i, grado-j);
 			}
 		}
 	}
 
+
 	Matriz<double> bMatriz (cantidadMediciones, 1);
-	vector<double> b = matrizAVector(bMatriz);
+
 
 
 	for(int i = 0; i < cantidadMediciones; ++i) {
@@ -41,14 +44,17 @@ vector<double> minimizarConGrado(vector<double>& mediciones, int grado) {
 	Matriz<double> ATranspuesta = A;
 	ATranspuesta.transponer();
 	Matriz<double> C = ATranspuesta*A;
+
 	Matriz<double> proyeccionBSobreAMatrix = ATranspuesta*bMatriz;
 	vector<double> proyeccionBSobreA = matrizAVector(proyeccionBSobreAMatrix);
 
 	gaussInf(C, proyeccionBSobreA);
+
 	vector<double> coeficientesPivoteados (proyeccionBSobreA.size());
-	backSubst(C, b, coeficientesPivoteados);
+	backSubst(C, proyeccionBSobreA, coeficientesPivoteados);
 
 	vector<double> coeficientes = C.despivotear(coeficientesPivoteados);
+	reverse(coeficientes.begin(), coeficientes.end());
 
 	return coeficientes;
 

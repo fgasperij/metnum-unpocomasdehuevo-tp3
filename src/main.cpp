@@ -37,12 +37,10 @@ int main(int argc, char **argv)
 
 	// Movimientos del arquero.
     vector<int> movimientos;
-    
 	while(!disparo.detenido()){
 		disparo.tic();
-		movimientos.push_back(higuita.atajar(disparo.estimarPorDondePasa()));
-	//CONSULTA: podríamos hacer el push_back en la función del Arquero q tiene el vector movimientos
-    // Alguna razón especial para ponerlo aquí afuera?
+		double aprox = disparo.estimarPorDondePasa();
+		movimientos.push_back(higuita.atajar(aprox));
 	}
 
 	// Resultado

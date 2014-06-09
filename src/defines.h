@@ -34,7 +34,7 @@ struct Posicion{
 };
 
 struct aproximacion {
-	aproximacion(){};
+	aproximacion(){valida = false;}
 	aproximacion(bool valida, double valor) : valida(valida), valor(valor){};
 	aproximacion(bool valida) : valida(valida) {};
     aproximacion(double valor) : valida(true), valor(valor) {};
@@ -73,7 +73,7 @@ struct Data{
 #define X_DEL_ARCO 125
 #define BISECCION 1
 #define NEWTON 2
-#define INTERVALO_BISECCION 100
+#define INTERVALO_BISECCION 100000
 #define DIGITS_NEWTON 10
 
 

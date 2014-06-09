@@ -58,7 +58,7 @@ tuple<double,double> evalNewton(vector<double> &coefs, double x) {
 
 	double resDer = coefs[1];
 	for(unsigned i = 2; i < coefs.size(); ++i) {
-		resDer += coefs[i]*pow(x, (int) i-1);
+		resDer += i*coefs[i]*pow(x, (int) i-1);
 	}
 	get<1>(ret) = resDer;
 

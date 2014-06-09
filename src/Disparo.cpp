@@ -1,6 +1,8 @@
 #include "Disparo.h"
 #include "CMP.h"
 #include "zeros.h"
+#include "display.h"
+
 
 void Disparo::tic(){instanteActual++;}
 
@@ -34,32 +36,50 @@ double Disparo::estimarPorDondePasa() {
 	 *   	trayectoriaActual.size() = 3 ---> trayectoriaActual.size()-1 = 2
 	 *    	Aproximo con grado 0 y 1. Grado 2 ya me daría un interpolador.
 	 */
-	int grados = trayectoriaActual.size()-1;
+
+	// Cantidad de puntos medidos hasta el instante actual.
+	int cantPuntosActuales = trayectoriaActual.size();
 
 	// En el primer instante devuelvo lo mismo.
-    if(grados == 0){return trayectoria[0].y;}
+    if(cantPuntosActuales == 1){return trayectoria[0].y;}
 
-	vector<aproximacion> aproximaciones(grados);
+    int grados = 2;    // Uso polinomios de hasta grado 2.
+
+    // Las aproximaciones para los distintos polinomios.
+	vector<aproximacion> aproximaciones(grados+1);
 
 	vector<double> xs = obtenerXs(trayectoriaActual);
-    vector<double> ys = obtenerYs(trayectoriaActual); // double x vector<double>
+    vector<double> ys = obtenerYs(trayectoriaActual);
 
 
-
-    // Con grado 0, la aproximacion es constante.
+    // Con grado 0, la aproximacion es constante. Muy poco util.
     aproximaciones[0] = xs[xs.size()-1];
-	for (int i = 1; i < grados; i++) {
+    // El resto de las aproximaciones hasta polinomios de hasta grado grados. El grado maximo tambien queda definido
+    // por la cantidad de puntos actuales.
+	for (int i = 1; i <= grados && i < cantPuntosActuales; i++) {
 
-		vector<double> coeficientesMinimizadoresXs = minimizarConGrado(xs, i); // double x vector<double>
+        // Esta cosa fea es para que solo considere los ultimos puntos, invierto, me quedo con los primeros y vuelvo a invertir.
+        vector<double> xss = xs;
+        reverse(xss.begin(), xss.end());
+        xss.resize(i+1);
+        reverse(xss.begin(), xss.end());
 
+		vector<double> coeficientesMinimizadoresXs = minimizarConGrado(xss, i, instanteActual);
 
-		vector<double> coeficientesMinimizadoresYs = minimizarConGrado(ys, i); // double x vector<double>
+        vector<double> yss = ys;
+        reverse(yss.begin(), yss.end());
+        yss.resize(i+1);
+        reverse(yss.begin(), yss.end());
+
+		vector<double> coeficientesMinimizadoresYs = minimizarConGrado(yss, i, instanteActual);
 
 		coeficientesMinimizadoresXs[0] -= X_DEL_ARCO;
+
 		// BISECCION | NEWTON
+		// Si boost devuelve error, omito el valor.
 		try{
             double tiempoGol = calcularRaiz(coeficientesMinimizadoresXs, BISECCION);
-            aproximaciones[i] = aproximacion (eval(coeficientesMinimizadoresYs, tiempoGol));
+            aproximaciones[i] = aproximacion (true,eval(coeficientesMinimizadoresYs, tiempoGol));
 		}
 		catch(...){
             aproximaciones[i] = aproximacion(false, 0);
@@ -68,7 +88,7 @@ double Disparo::estimarPorDondePasa() {
 
 //	double aproximacionFinal = decidirEnBaseATodasLasAproximaciones(aproximaciones);
 
-// Por el momento me quedo con la ultima aproximacion valida.
+// Por el momento me quedo con la ultima aproximacion valida. Deberia de ser la mas precisa.
     double aproximacionFinal = 0;
 	for(unsigned int i = 0; i < aproximaciones.size(); i++){
         if(aproximaciones[i].valida){
