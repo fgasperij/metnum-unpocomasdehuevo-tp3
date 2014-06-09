@@ -5,6 +5,9 @@
 
 void my_handler(int s){
            std::cout<<ENDCOLOR<<std::endl << std::flush;
+           // Para evitar warning unused variable.
+           int evitarWarning = s;
+           evitarWarning++;
            exit(0);
 
 }

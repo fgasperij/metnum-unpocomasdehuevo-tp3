@@ -5,6 +5,7 @@
 #include "io.h"
 
 
+
 void Disparo::tic(){instanteActual++;}
 
 void Disparo::reset(){instanteActual = 0;}
@@ -46,13 +47,11 @@ double Disparo::estimarPorDondePasa() {
 
     unsigned int grados = 3;    // Uso polinomios de hasta grado 2.
 
-    // Las aproximaciones para los distintos polinomios.
-	vector<aproximacion> aproximaciones(grados+1);
 
 	vector<double> xs = obtenerXs(trayectoriaActual);
     vector<double> ys = obtenerYs(trayectoriaActual);
 
-    // Me quedo con la ultima seria de mediciones crecientes.
+    // Me quedo con la ultima seria de mediciones decrecientes.
     vector<double> aux = xs;
     reverse(aux.begin(), aux.end());
     vector<double> xsp;
@@ -63,10 +62,16 @@ double Disparo::estimarPorDondePasa() {
         else if(i+1 == aux.size()){xsp.push_back(aux[i]);}
         else{break;}
     }
+    // Esto es para que solo considere las ultimas CANT_MEDICIONES. No mejoro eficacia.
+    //if(xsp.size() > CANT_MEDICIONES){xsp.resize(CANT_MEDICIONES);}
     reverse(xsp.begin(), xsp.end());
 
+
+    // Las aproximaciones para los distintos polinomios.
+	vector<aproximacion> aproximaciones(0);
     // Con grado 0, la aproximacion es constante. Muy poco util. Aunque cuando hay un solo punto a considerar quizas sea lo mejor.
-    aproximaciones[0] = ys[ys.size()-1];
+    aproximaciones.push_back( aproximacion(ys[ys.size()-1]));
+
     // El resto de las aproximaciones hasta polinomios de hasta grado grados. El grado maximo tambien queda definido
     // por la cantidad de puntos actuales.
 	for (unsigned int i = 1; i <= grados && i < cantPuntosActuales && i < xsp.size(); i++) {
@@ -92,12 +97,20 @@ double Disparo::estimarPorDondePasa() {
 		// Si boost devuelve error, omito el valor.
 		try{
             double tiempoGol = calcularRaiz(coeficientesMinimizadoresXs, BISECCION);
-            aproximaciones[i] = aproximacion (true,eval(coeficientesMinimizadoresYs, tiempoGol));
+            aproximaciones.push_back( aproximacion(true, eval(coeficientesMinimizadoresYs, tiempoGol)));
 		}
 		catch(...){
-            aproximaciones[i] = aproximacion(false, 0);
+            aproximaciones.push_back(aproximacion(false, 0));
 		}
 	}
+
+	// Estimaciones dadas popr los polinomios.
+    vector<double> estimacionPorPolinomio (0);
+	for(unsigned int i = 0;i < aproximaciones.size(); i++){
+        	estimacionPorPolinomio.push_back(aproximaciones[i].valor);
+	}
+	estimaciones.push_back(estimacionPorPolinomio);
+
 
 //	double aproximacionFinal = decidirEnBaseATodasLasAproximaciones(aproximaciones);
 
@@ -113,3 +126,12 @@ double Disparo::estimarPorDondePasa() {
 	return aproximacionFinal;
 
 }
+
+/** TODO:
+ Guardar rastro de los valores reales y las aproximaciones y comparar el error, para asi poder
+ determinar que polinomio aproxima mejor a la funcion. Esto va a permitir deducir si la trayectoria
+ de la pelota es lineal, cuadratica, cubica o lo que sea.
+ Parcialmente hecho con "estimaciones", falta ver que polinomio aproxima mejor.
+*/
+
+int Disparo::devErrores(){return errores;}

@@ -11,7 +11,7 @@
 #include "io.h"
 #include "Arquero.h"
 #include "signal.h"
-
+int errores = 0;
 int main(int argc, char **argv)
 {
 
@@ -44,6 +44,6 @@ int main(int argc, char **argv)
     escribirVector(file_out, higuita.devolverMovimientos());
 
 	msg_footer();
-
+    //cout << "Err " << disparo.devErrores() << endl;
 	return 0;
 }

@@ -76,6 +76,8 @@ struct Data{
 #define INTERVALO_BISECCION 100000
 #define DIGITS_NEWTON 10
 
+// Cantidad de medicions a usar para aproximar
+#define CANT_MEDICIONES 8
 
 // Precicion decimal para la salida
 #define PRECISION 6

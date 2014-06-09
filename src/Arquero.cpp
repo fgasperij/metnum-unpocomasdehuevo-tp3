@@ -48,6 +48,8 @@ void Arquero::atajar(double posicionEntrada){
 //    for(unsigned int i = 0; i < estimaciones.size(); i++){
 //        ponderaciones.push_back(2*pond_inicial);
 //    }
+//    // Ni el promedio comun ni el promedio ponderado mejoraron la eficiacia.
+//    //double posicionEntrada = calcularPromedio(estimaciones);
 //    //double posicionEntrada = calcularPromedio(estimaciones);
 //    double posicionEntrada = posicionAprox;
 
