@@ -63,7 +63,9 @@ double Disparo::estimarPorDondePasa() {
     vector<double> yss = ultimos(ys, puntosAConsiderar);
 
     // Aproximo con polinomios de hasta grado i. El grado debe ser menor a puntosAConsiderar para no interpolar.
-    unsigned int grados = min(MAX_GRADO, puntosAConsiderar-1);
+    unsigned int grados = MAX_GRADO;
+    // Si hay un solo punto no calculo ningun polinomio.
+    if(puntosAConsiderar < 2){grados = 0;}
 	for (unsigned int i = 1; i < grados; i++) {
 
 		vector<double> coeficientesMinimizadoresXs = minimizarConGrado(xss, i, instanteActual);
@@ -99,13 +101,13 @@ double Disparo::estimarPorDondePasa() {
     double cantAproxs = 0;
 	for(unsigned int i = 1; i < aproximaciones.size(); i++){
         if(aproximaciones[i].valida){
-            aproximacionFinal += aproximaciones[i].valor;
+            aproximacionFinal = aproximaciones[i].valor;
             cantAproxs++;
         }
 	}
 
-    cout << aproximacionFinal/cantAproxs << endl;
-	return aproximacionFinal/cantAproxs;
+	return aproximacionFinal/1;
+
 
 }
 
