@@ -73,8 +73,9 @@ double Disparo::estimarPorDondePasa() {
     reverse(yss.begin(), yss.end());
     yss.resize(puntosAConsiderar);
     reverse(yss.begin(), yss.end());
-    // Aproximo con polinomios de hasta grado i.
-	for (unsigned int i = 1; i < MAX_GRADO; i++) {
+    // Aproximo con polinomios de hasta grado i. El grado debe ser menor a puntosAConsiderar para no interpolar.
+    unsigned int grados = min(MAX_GRADO, puntosAConsiderar-1);
+	for (unsigned int i = 1; i < grados; i++) {
 
 		vector<double> coeficientesMinimizadoresXs = minimizarConGrado(xss, i, instanteActual);
 
@@ -109,13 +110,13 @@ double Disparo::estimarPorDondePasa() {
     double cantAproxs = 0;
 	for(unsigned int i = 1; i < aproximaciones.size(); i++){
         if(aproximaciones[i].valida){
-            aproximacionFinal += aproximaciones[i].valor;
+            aproximacionFinal = aproximaciones[i].valor;
             cantAproxs++;
         }
 	}
 
 
-	return aproximacionFinal/cantAproxs;
+	return aproximacionFinal/1;
 
 }
 
