@@ -16,7 +16,7 @@ int main(int argc, char **argv)
 {
 
 	// MANEJAR SI EL PROGRAMA FUE LLAMADO DE MANERA INCORRECTA
-    if(argc != 3){cerr << "Cantidad de parametros incorrecta " ;return 0;}
+    if(argc != 4 && argc != 3){cerr << "Cantidad de parametros incorrecta " ;return 0;}
 	char * file_in = argv[1];
 	char * file_out = argv[2];
 	/*** Para evitar que se cambie el color al salir con Ctrl+C u otros ***/

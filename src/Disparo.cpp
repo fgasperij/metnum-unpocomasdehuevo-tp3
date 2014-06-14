@@ -45,7 +45,7 @@ double Disparo::estimarPorDondePasa() {
 	// En el primer instante devuelvo lo mismo.
     //if(cantPuntosActuales == 1){return trayectoria[0].y;}
 
-    unsigned int grados = 3;    // Uso polinomios de hasta grado 2.
+    unsigned int grados = MAX_GRADO;    // Uso polinomios de hasta grado MAX_GRADO.
 
 
 	vector<double> xs = obtenerXs(trayectoriaActual);
@@ -74,7 +74,7 @@ double Disparo::estimarPorDondePasa() {
 
     // El resto de las aproximaciones hasta polinomios de hasta grado grados. El grado maximo tambien queda definido
     // por la cantidad de puntos actuales.
-	for (unsigned int i = 1; i <= grados && i < cantPuntosActuales && i < xsp.size(); i++) {
+	for (unsigned int i = 1; i < xsp.size(); i++) {
 
         // Esta cosa fea es para que solo considere los ultimos puntos, invierto, me quedo con los primeros y vuelvo a invertir.
         vector<double> xss = xs;
@@ -116,14 +116,16 @@ double Disparo::estimarPorDondePasa() {
 
 // Por el momento me quedo con la ultima aproximacion valida. Deberia de ser la mas precisa.
     double aproximacionFinal = 0;
+    double cantAproxs = 0;
 	for(unsigned int i = 0; i < aproximaciones.size(); i++){
         if(aproximaciones[i].valida){
-            aproximacionFinal = aproximaciones[i].valor;
+            aproximacionFinal += aproximaciones[i].valor;
+            cantAproxs++;
         }
 	}
 
 
-	return aproximacionFinal;
+	return aproximacionFinal/cantAproxs;
 
 }
 
