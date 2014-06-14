@@ -74,7 +74,7 @@ double Disparo::estimarPorDondePasa() {
     yss.resize(puntosAConsiderar);
     reverse(yss.begin(), yss.end());
     // Aproximo con polinomios de hasta grado i.
-	for (unsigned int i = 1; i < cantCrecientes && i < CANT_MEDICIONES; i++) {
+	for (unsigned int i = 1; i < MAX_GRADO; i++) {
 
 		vector<double> coeficientesMinimizadoresXs = minimizarConGrado(xss, i, instanteActual);
 

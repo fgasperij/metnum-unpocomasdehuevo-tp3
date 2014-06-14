@@ -79,6 +79,9 @@ struct Data{
 // Cantidad de medicions a usar para aproximar
 #define CANT_MEDICIONES 8
 
+// Grado maximo del polinomio
+#define MAX_GRADO 3
+
 // Precicion decimal para la salida
 #define PRECISION 6
 
