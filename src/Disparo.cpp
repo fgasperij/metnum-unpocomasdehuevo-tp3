@@ -1,5 +1,6 @@
 #include "Disparo.h"
 #include "CMP.h"
+#include "misc.h"
 #include "zeros.h"
 #include "display.h"
 #include "io.h"
@@ -42,17 +43,10 @@ double Disparo::estimarPorDondePasa() {
 	vector<double> xs = obtenerXs(trayectoriaActual);
     vector<double> ys = obtenerYs(trayectoriaActual);
 
-    // Me quedo con la ultima seria de mediciones decrecientes.
+    // Me quedo con la ultima serie de mediciones decrecientes.
     vector<double> aux = xs;
     reverse(aux.begin(), aux.end());
-    unsigned int cantCrecientes = 0;
-    for(unsigned int i = 0; i < aux.size() ; i++){
-        if(i+1 < aux.size() && aux[i] <= aux[i+1] ){
-            cantCrecientes++;
-        }
-        else if(i+1 == aux.size()){cantCrecientes++;}
-        else{break;}
-    }
+    unsigned int cantCrecientes = contarPrimCrecientes(aux);
 
     // Las aproximaciones para los distintos polinomios.
 	vector<aproximacion> aproximaciones(0);
@@ -65,14 +59,9 @@ double Disparo::estimarPorDondePasa() {
 
     // Esta cosa fea es para que solo considere los ultimos CANT_MEDICIONES puntos positivos, invierto, me quedo con los primeros y vuelvo a invertir.
     int puntosAConsiderar = min(CANT_MEDICIONES, min((int) trayectoriaActual.size(), (int) cantCrecientes));
-    vector<double> xss = xs;
-    reverse(xss.begin(), xss.end());
-    xss.resize(puntosAConsiderar);
-    reverse(xss.begin(), xss.end());
-    vector<double> yss = ys;
-    reverse(yss.begin(), yss.end());
-    yss.resize(puntosAConsiderar);
-    reverse(yss.begin(), yss.end());
+    vector<double> xss = ultimos(xs, puntosAConsiderar);
+    vector<double> yss = ultimos(ys, puntosAConsiderar);
+
     // Aproximo con polinomios de hasta grado i. El grado debe ser menor a puntosAConsiderar para no interpolar.
     unsigned int grados = min(MAX_GRADO, puntosAConsiderar-1);
 	for (unsigned int i = 1; i < grados; i++) {
@@ -110,13 +99,13 @@ double Disparo::estimarPorDondePasa() {
     double cantAproxs = 0;
 	for(unsigned int i = 1; i < aproximaciones.size(); i++){
         if(aproximaciones[i].valida){
-            aproximacionFinal = aproximaciones[i].valor;
+            aproximacionFinal += aproximaciones[i].valor;
             cantAproxs++;
         }
 	}
 
-
-	return aproximacionFinal/1;
+    cout << aproximacionFinal/cantAproxs << endl;
+	return aproximacionFinal/cantAproxs;
 
 }
 

@@ -11,6 +11,28 @@ bool esCero(T& val){
    return ((-CERO < val) && (val < CERO));
 }
 
+template<class T>
+unsigned int contarPrimCrecientes(vector<T>& vec){
+    unsigned int cantCrecientes = 0;
+    for(unsigned int i = 0; i < vec.size() ; i++){
+        if(i+1 < vec.size() && vec[i] <= vec[i+1] ){
+            cantCrecientes++;
+        }
+        else if(i+1 == vec.size()){cantCrecientes++;}
+        else{break;}
+    }
+    return cantCrecientes;
+}
+
+template<class T>
+vector<T> ultimos(const vector<T>& vec,int cant = 0){
+    vector<T> aux = vec;
+    reverse(aux.begin(), aux.end());
+    aux.resize(cant);
+    reverse(aux.begin(), aux.end());
+    return aux;
+}
+
 
 template<class T>
 vector<T> matrizAVector(Matriz<T>& A){
