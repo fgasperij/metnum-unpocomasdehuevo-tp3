@@ -26,7 +26,7 @@ vector<double> minimizarConGrado(vector<double>& mediciones, int grado, int tiem
 				A[i][j] = 1;
 			} else {
 				// los t_i son discretos entonces son 0,1,2,3,..,cantidadMediciones
-				A[i][j] = pow(tiempo+i, grado-j);
+				A[i][j] = pow(tiempo-i, grado-j);
 			}
 		}
 	}
