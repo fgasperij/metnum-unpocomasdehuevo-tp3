@@ -8,15 +8,26 @@ cd franco\documentclass[11pt, a4paper]{article}
 \grupo{Grupo 2}
 \integrante{Franco Bartalotta}{347/11}{franco.bartalotta@hotmail.com}
 \integrante{Fernando Gasperi Jabalera}{56/09}{fgasperijabalera@gmail.com}
+\integrante{Erik Machicado}{067/12}{erik.machicado@hotmail.com}
 \integrante{Ana Sarri\'es}{144/02}{abarloventos@gmail.com}
 
-\resumen{Arquero robot.}
-\claves{Arquero robot.}
+\resumen{El presente trabajo tiene como objetivo, predecir con la mayor anticipación posible 
+la posición futura de una pelota en el campo de fútbol, utilizando la posición de la 
+misma en el pasado, para coordinar los movimientos de nuestro arquero.
+Para resolver este problema computacionalmente, se decidió considerar el tiempo de manera discreta, 
+el campo de futbol como un plano de $\mathbb{R}^2$.}
+\claves{Cuadrados Mínimos, Arquero robot.}
 
 \begin{document}  
 \maketitle
 \tableofcontents
 
 \newpage
+\input{introduccion}
+\newpage
 
+% Bibliografía
+\addcontentsline{toc}{section}{Referencias}
+\bibliography{tp3.bib}{}
+\bibliographystyle{acm}
 \end{document}
