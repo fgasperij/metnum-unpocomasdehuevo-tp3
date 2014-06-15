@@ -2,12 +2,13 @@
 
 from sys import argv
 import argparse
-import xml.etree.ElementTree as ET
 
 MAX_GRADO = "max_grado"
 CANT_MEDICIONES = "cant_mediciones"
 
 from xml.dom.minidom import *
+
+pretty_print = lambda data: '\n'.join([line for line in data.toprettyxml(indent=' '*3).split('\n') if line.strip()])	
 
 def main(arg = argv):
 	parser = argparse.ArgumentParser(description="Archivo para modificar parametros de configuracion global")
@@ -34,7 +35,8 @@ def main(arg = argv):
 		config.appendChild(cm_node)
 
 	config_file = open("config.xml", 'w')
-	config_file.write(dom.toprettyxml())
+
+	config_file.write(pretty_print(dom))
 	config_file.close()
 
 if __name__ == "__main__":

@@ -3,6 +3,6 @@
 <config>
 	<!-- cant_mediciones = Numero de mediciones (ultimas) a utilizar para aproximar la pelota -->
 	<!-- max_grado = Maximo grado a utilizar (hay que poner grado + 1 al grado deseado.) -->
-	<cant_mediciones> 10 </cant_mediciones>
-	<max_grado>32</max_grado>
+	<cant_mediciones> 8 </cant_mediciones>
+	<max_grado>4</max_grado>
 </config>
