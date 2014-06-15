@@ -42,6 +42,13 @@ struct aproximacion {
 	double valor;
 };
 
+struct config {
+    int cant_mediciones;
+    int max_grado;
+    config(int cant_mediciones, int max_grado) : cant_mediciones(cant_mediciones), max_grado(max_grado) {}
+};
+
+
 
 struct Data{
 	double mu;		// Desplazamiento maximo
@@ -77,10 +84,16 @@ struct Data{
 #define DIGITS_NEWTON 10
 
 // Cantidad de medicions a usar para aproximar
-#define CANT_MEDICIONES 8
+#define CANT_MEDICIONES 4
 
 // Grado maximo -1 del polinomio
 #define MAX_GRADO 4
+
+// Ultimas aproximaciones a utilizar para eliminar outliers.
+#define CANT_APROX 4
+
+// Valor para el cual se considerar un outlier
+#define UMBRAL_MAX 500
 
 // Precicion decimal para la salida
 #define PRECISION 6

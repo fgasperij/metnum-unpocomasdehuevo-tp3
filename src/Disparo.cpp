@@ -4,6 +4,7 @@
 #include "zeros.h"
 #include "display.h"
 #include "io.h"
+#include "global.h"
 
 
 
@@ -28,7 +29,7 @@ bool Disparo::detenido() {
 }
 
 double Disparo::estimarPorDondePasa() {
-	vector<Posicion> trayectoriaActual = devolverTrayectoria();
+
 
 	/**
 	 * Sólo aproximamos desde grado 0 hasta el grado anterior al que nos provee
@@ -39,6 +40,13 @@ double Disparo::estimarPorDondePasa() {
 	 *   	trayectoriaActual.size() = 3 ---> trayectoriaActual.size()-1 = 2
 	 *    	Aproximo con grado 0 y 1. Grado 2 ya me daría un interpolador.
 	 */
+
+
+	// Parametros: Los cargo desde la configuracion global.
+    unsigned int grados = (unsigned int) conf.max_grado;
+    int cant_mediciones = conf.cant_mediciones;
+
+	vector<Posicion> trayectoriaActual = devolverTrayectoria();
 
 	vector<double> xs = obtenerXs(trayectoriaActual);
     vector<double> ys = obtenerYs(trayectoriaActual);
@@ -58,14 +66,14 @@ double Disparo::estimarPorDondePasa() {
     // por la cantidad de puntos actuales.
 
     // Esta cosa fea es para que solo considere los ultimos CANT_MEDICIONES puntos positivos, invierto, me quedo con los primeros y vuelvo a invertir.
-    int puntosAConsiderar = min(CANT_MEDICIONES, min((int) trayectoriaActual.size(), (int) cantCrecientes));
+    int puntosAConsiderar = min(cant_mediciones, min((int) trayectoriaActual.size(), (int) cantCrecientes));
     vector<double> xss = ultimos(xs, puntosAConsiderar);
     vector<double> yss = ultimos(ys, puntosAConsiderar);
 
     // Aproximo con polinomios de hasta grado i. El grado debe ser menor a puntosAConsiderar para no interpolar.
-    unsigned int grados = MAX_GRADO;
+
     // Si hay un solo punto no calculo ningun polinomio.
-    if(puntosAConsiderar < 2){grados = 0;}
+    if(puntosAConsiderar < 2){grados = conf.max_grado;}
 	for (unsigned int i = 1; i < grados; i++) {
 
 		vector<double> coeficientesMinimizadoresXs = minimizarConGrado(xss, i, instanteActual);

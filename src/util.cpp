@@ -1,5 +1,7 @@
 #include "util.h"
 #include "signal.h"
+#include "global.h"
+#include "pugixml.hpp"
 
 /*** Mensajes pantalla ***/
 
@@ -53,5 +55,15 @@ bool es_par(int n)
 	return (n%2==0);
 }
 
+using namespace pugi;
+/*** Carga la configuracion  ***/
+void cargarConfiguracion(const char * file_xml){
+    xml_document doc;
+    if(!doc.load_file(file_xml)){return;};
+    xml_node config =  doc.child("config");
+    xml_node cant_mediciones = config.child("cant_mediciones");
+    xml_node max_grado = config.child("max_grado");
+    if(cant_mediciones){conf.cant_mediciones = atoi((cant_mediciones.text()).get());}
+    if(max_grado){conf.max_grado = atoi((max_grado.text()).get());}
 
-
+}

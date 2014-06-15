@@ -11,6 +11,9 @@
 #include "io.h"
 #include "Arquero.h"
 #include "signal.h"
+
+
+
 int errores = 0;
 int main(int argc, char **argv)
 {
@@ -19,6 +22,8 @@ int main(int argc, char **argv)
     if(argc != 4 && argc != 3){cerr << "Cantidad de parametros incorrecta " ;return 0;}
 	char * file_in = argv[1];
 	char * file_out = argv[2];
+//	char * file_jug;
+//	if(argc == 4){file_jug = argv[3];}
 	/*** Para evitar que se cambie el color al salir con Ctrl+C u otros ***/
 	struct sigaction sigIntHandler;
 	sigIntHandler.sa_handler = my_handler;
@@ -27,6 +32,9 @@ int main(int argc, char **argv)
 	sigaction(SIGINT, &sigIntHandler, NULL);
 
 	msg_header();
+
+    // Cargo parametros de configuracion globales.
+	cargarConfiguracion("config.xml");
 
 	Data data;
 	leerDatosBasicos(file_in, data);

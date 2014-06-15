@@ -71,6 +71,9 @@ class Disparo{
         // Notar que no todas las filas tienen la misma cantidad de columnas.
         vector< vector<double> > estimaciones;
 
+        // Aproximaciones finales.
+        vector<double> aproxs;
+
 
 };
 

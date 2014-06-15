@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<!-- Archivo de configuracion global, evita tener que recompila cada vez que se cambia algun parametro. -->
+<config>
+	<!-- cant_mediciones = Numero de mediciones (ultimas) a utilizar para aproximar la pelota -->
+	<!-- max_grado = Maximo grado a utilizar (hay que poner grado + 1 al grado deseado.) -->
+	<cant_mediciones> 10 </cant_mediciones>
+	<max_grado>32</max_grado>
+</config>

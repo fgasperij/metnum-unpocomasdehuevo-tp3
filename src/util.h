@@ -11,6 +11,8 @@
 #include "defines.h"
 #include <stdlib.h>
 
+/*** Carga la configuracion  ***/
+void cargarConfiguracion(const char * file_xml);
 
 
 /*** Mensajes pantalla ***/
@@ -21,6 +23,7 @@ void msg_parseo_falla(std::string);
 
 /*** Handler para salir Ctr+C u otros sin cambio de color ***/
 void my_handler(int s);
+
 
 /*** Aritméticas ***/
 int signo(double x);
