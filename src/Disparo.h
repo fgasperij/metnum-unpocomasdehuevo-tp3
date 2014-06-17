@@ -16,7 +16,7 @@ class Disparo{
 		 * Recibe la trayectoria completa del disparo.
 		 */
 		Disparo(vector<Posicion> trayectoria)
-		: trayectoria(trayectoria), instanteActual(0), flag_test(false), errores(0) {}
+		: trayectoria(trayectoria), instanteActual(0), flag_test(false) {}
 		/**
 		 * Aumenta el instanteActual en 1, el disparo avanza una unidad de
 		 * tiempo.
@@ -45,6 +45,8 @@ class Disparo{
 
 		void setearFlagTest(bool);
 
+
+
         // Errores del calculo de cero de funciones
 		int devErrores();
 
@@ -61,19 +63,6 @@ class Disparo{
 		 */
 		int instanteActual;
 		bool flag_test;
-
-
-        // Errores del calculo de cero de funciones
-        int errores;
-
-        // Vector de estimaciones
-        // estimaciones[i][j] = Valor de la aproximacion en el insante i+1 con el polinomio de grado j.
-        // Notar que no todas las filas tienen la misma cantidad de columnas.
-        vector< vector<double> > estimaciones;
-
-        // Aproximaciones finales.
-        vector<double> aproxs;
-
 
 };
 

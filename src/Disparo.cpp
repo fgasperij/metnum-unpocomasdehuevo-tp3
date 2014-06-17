@@ -31,17 +31,6 @@ bool Disparo::detenido() {
 double Disparo::estimarPorDondePasa() {
 
 
-	/**
-	 * Sólo aproximamos desde grado 0 hasta el grado anterior al que nos provee
-	 * un polinomio interpolador porque las mediciones tienen errores.
-	 *
-	 * Ejemplo:
-	 * 		Tengo 3 mediciones (x1, y1) (x2, y2) (x3, y3)
-	 *   	trayectoriaActual.size() = 3 ---> trayectoriaActual.size()-1 = 2
-	 *    	Aproximo con grado 0 y 1. Grado 2 ya me daría un interpolador.
-	 */
-
-
 	// Parametros: Los cargo desde la configuracion global.
     unsigned int grados = (unsigned int) conf.max_grado;
     int cant_mediciones = conf.cant_mediciones;
@@ -62,18 +51,17 @@ double Disparo::estimarPorDondePasa() {
     // Con grado 0, la aproximacion es constante. Muy poco util. Aunque cuando hay un solo punto a considerar quizas sea lo mejor.
     aproximaciones.push_back( aproximacion(ys[ys.size()-1]));
 
-    // El resto de las aproximaciones hasta polinomios de hasta grado grados. El grado maximo tambien queda definido
-    // por la cantidad de puntos actuales.
 
-    // Esta cosa fea es para que solo considere los ultimos CANT_MEDICIONES puntos positivos, invierto, me quedo con los primeros y vuelvo a invertir.
+    // Agarro los ultimos puntos de las mediciones.
     int puntosAConsiderar = min(cant_mediciones, min((int) trayectoriaActual.size(), (int) cantCrecientes));
     vector<double> xss = ultimos(xs, puntosAConsiderar);
     vector<double> yss = ultimos(ys, puntosAConsiderar);
 
-    // Aproximo con polinomios de hasta grado i. El grado debe ser menor a puntosAConsiderar para no interpolar.
 
     // Si hay un solo punto no calculo ningun polinomio.
     if(puntosAConsiderar < 2){grados = conf.max_grado;}
+    // El grado esta acotado por los puntos a considerar.
+    grados = min(puntosAConsiderar, (int) grados);
 	for (unsigned int i = 1; i < grados; i++) {
 
 		vector<double> coeficientesMinimizadoresXs = minimizarConGrado(xss, i, instanteActual);
@@ -92,16 +80,6 @@ double Disparo::estimarPorDondePasa() {
             aproximaciones.push_back(aproximacion(false, 0));
 		}
 	}
-
-	// Estimaciones dadas popr los polinomios.
-    vector<double> estimacionPorPolinomio (0);
-	for(unsigned int i = 0;i < aproximaciones.size(); i++){
-        	estimacionPorPolinomio.push_back(aproximaciones[i].valor);
-	}
-	estimaciones.push_back(estimacionPorPolinomio);
-
-
-//	decidirEnBaseATodasLasAproximaciones(aproximaciones);
 
 // Por el momento me quedo con la ultima aproximacion valida. Deberia de ser la mas precisa.
     double aproximacionFinal = 0;
@@ -126,4 +104,4 @@ double Disparo::estimarPorDondePasa() {
  Parcialmente hecho con "estimaciones", falta ver que polinomio aproxima mejor.
 */
 
-int Disparo::devErrores(){return errores;}
+
