@@ -1,3 +1,9 @@
 #include "global.h"
 // Parametros de configuraciones gloables
-config conf = config(CANT_MEDICIONES, MAX_GRADO);
+config conf;
+
+void cargarConfPorDefecto(){
+    conf.cant_mediciones = MAX_GRADO;
+    conf.max_grado = CANT_MEDICIONES;
+    conf.lagrange = false;
+}

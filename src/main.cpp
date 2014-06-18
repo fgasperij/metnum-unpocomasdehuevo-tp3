@@ -11,6 +11,7 @@
 #include "io.h"
 #include "Arquero.h"
 #include "signal.h"
+#include "global.h"
 
 
 
@@ -33,7 +34,9 @@ int main(int argc, char **argv)
 
 	msg_header();
 
+
     // Cargo parametros de configuracion globales.
+    cargarConfPorDefecto();
 	cargarConfiguracion("config.xml");
 
 	Data data;

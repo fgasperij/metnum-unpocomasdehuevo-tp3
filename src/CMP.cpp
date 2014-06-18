@@ -3,6 +3,8 @@
 #include <assert.h>
 #include "Matriz.h"
 #include "misc.h"
+#include <algorithm>
+
 
 /**
  * @param mediciones mediciones[i] = x(i) ==> el valor de x en el instante i
@@ -29,7 +31,6 @@ vector<double> minimizarConGrado(vector<double>& mediciones, int grado, int tiem
 
 
 	Matriz<double> bMatriz (cantidadMediciones, 1);
-
 
 
 	for(int i = 0; i < cantidadMediciones; ++i) {

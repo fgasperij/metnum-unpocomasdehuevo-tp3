@@ -64,6 +64,9 @@ class Disparo{
 		int instanteActual;
 		bool flag_test;
 
+		double aproximarConCMP();
+		double aproximarConLagrange();
+
 };
 
 #endif

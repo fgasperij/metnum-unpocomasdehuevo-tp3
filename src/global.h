@@ -4,5 +4,6 @@
 
 // Parametros de configuraciones gloables
 extern config conf;
+void cargarConfPorDefecto();
 
 #endif

@@ -28,10 +28,48 @@ bool Disparo::detenido() {
 	return instanteActual > (int) trayectoria.size()-1;
 }
 
-double Disparo::estimarPorDondePasa() {
+double Disparo::aproximarConLagrange(){
+
+    // Parametros: Los cargo desde la configuracion global.
+    // El grado maximo a utilizar es cant_mediciones-1
+    int cant_mediciones = conf.cant_mediciones;
+
+	vector<Posicion> trayectoriaActual = devolverTrayectoria();
+
+	vector<double> xs = obtenerXs(trayectoriaActual);
+    vector<double> ys = obtenerYs(trayectoriaActual);
+
+    // Me quedo con la ultima serie de mediciones decrecientes.
+    vector<double> aux = xs;
+    reverse(aux.begin(), aux.end());
+    unsigned int cantCrecientes = contarPrimCrecientes(aux);
+
+    // Elijo el grado maximo posible.
+    int gradoLagrange = min(cant_mediciones, (int) cantCrecientes)-1;
+    if(gradoLagrange == 0){return ys[ys.size()-1];}
+
+    // Tomo la cantidad de puntos necesario.
+    vector<double> xss = ultimos(xs, gradoLagrange+1);
+    vector<double> yss = ultimos(ys, gradoLagrange+1);
+
+    // BISECCION | NEWTON
+    // Si boost devuelve error, pruebo valores hasta hallar el valor..
+    double tiempoGol = 0;
+    try{
+        tiempoGol = calcularRaizLagrange(xss, instanteActual);
+    }
+    catch(...){
+        double pred_y = probarValoresLagrange(xss, yss, instanteActual);
+        // Si no encontre nada, uso la misma que el anterior.
+        if(pred_y < 0){return ys[ys.size()-1];}
+    }
+    double aproximacionFinal = evalLagrange(ys, instanteActual, tiempoGol);
+    return aproximacionFinal;
+}
 
 
-	// Parametros: Los cargo desde la configuracion global.
+double Disparo::aproximarConCMP(){
+    // Parametros: Los cargo desde la configuracion global.
     unsigned int grados = (unsigned int) conf.max_grado;
     int cant_mediciones = conf.cant_mediciones;
 
@@ -53,7 +91,7 @@ double Disparo::estimarPorDondePasa() {
 
 
     // Agarro los ultimos puntos de las mediciones.
-    int puntosAConsiderar = min(cant_mediciones, min((int) trayectoriaActual.size(), (int) cantCrecientes));
+    int puntosAConsiderar = min(cant_mediciones, (int) cantCrecientes);
     vector<double> xss = ultimos(xs, puntosAConsiderar);
     vector<double> yss = ultimos(ys, puntosAConsiderar);
 
@@ -71,12 +109,14 @@ double Disparo::estimarPorDondePasa() {
 		coeficientesMinimizadoresXs[0] -= X_DEL_ARCO;
 
 		// BISECCION | NEWTON
-		// Si boost devuelve error, omito el valor.
+		// Si boost devuelve error, pruebo valores hasta hallar el valor..
 		try{
             double tiempoGol = calcularRaiz(coeficientesMinimizadoresXs, BISECCION);
             aproximaciones.push_back( aproximacion(true, eval(coeficientesMinimizadoresYs, tiempoGol)));
 		}
 		catch(...){
+		    double pred_y = probarValores(coeficientesMinimizadoresXs, coeficientesMinimizadoresYs, instanteActual);
+		    if(pred_y < 0){aproximaciones.push_back(aproximacion(true, pred_y));}
             aproximaciones.push_back(aproximacion(false, 0));
 		}
 	}
@@ -93,8 +133,11 @@ double Disparo::estimarPorDondePasa() {
 	}
 
 	return aproximacionFinal/1;
+}
 
-
+double Disparo::estimarPorDondePasa() {
+    if (conf.lagrange){return aproximarConLagrange();}
+    else{return aproximarConCMP();}
 }
 
 /** TODO:
