@@ -4,7 +4,7 @@ cantRec=5
 cantCuad=5
 cantCub=5
 cantVarArq=4
-cant_tests=10
+cant_tests=12
 
 #Directorios
 rec="rectas"
@@ -98,13 +98,13 @@ done
 # Resuelvo tests propios
 for((i=1; i < $cant_tests+1; i++))
 do
-	./tp $inst/$tests/$i.$tiro $inst/$tests/$i.$arq $inst/vacio.$jug
+	./tp $tests/$i.$tiro $tests/$i.$arq $tests/$i.$jug
 done
 
 # Veo el partido para los tests propios
-for((i=1; i < $cant_test+1; i++))
+for((i=1; i < $cant_tests+1; i++))
 do
-	python main.py $inst/$tests/$i.$arq $inst/$tests/$i.$tiro $inst/vacio.$jug
+	python main.py $tests/$i.$arq $tests/$i.$tiro $tests/$i.$jug
 done
 
 
