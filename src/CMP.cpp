@@ -2,11 +2,7 @@
 #include <math.h>
 #include <assert.h>
 #include "Matriz.h"
-#include "io.h"
 #include "misc.h"
-#include "zeros.h"
-#include "display.h"
-
 
 /**
  * @param mediciones mediciones[i] = x(i) ==> el valor de x en el instante i

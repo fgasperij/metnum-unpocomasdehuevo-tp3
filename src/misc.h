@@ -13,6 +13,13 @@ bool esCero(T& val){
 
 template<class T>
 unsigned int contarPrimCrecientes(vector<T>& vec){
+    
+    // unsigned int cantCrecientes = 1;
+    // int i = 0;
+    // while (i+1 < vec.size() && vec[i] <= vec[i+1]) {
+    //     cantCrecientes++;
+    // }
+
     unsigned int cantCrecientes = 0;
     for(unsigned int i = 0; i < vec.size() ; i++){
         if(i+1 < vec.size() && vec[i] <= vec[i+1] ){
