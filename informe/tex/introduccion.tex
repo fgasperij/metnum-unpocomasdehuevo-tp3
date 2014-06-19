@@ -1,0 +1,35 @@
+\section{Introducción}
+
+En el presente trabajo nos proponemos estudiar el problema de atajar un disparo de fútbol hacia la portería. Puntualmente tendremos control
+sobre el arquero y deberemos decidir en cada instante de tiempo en qué dirección debe moverse para lograr atajar el disparo. 
+Impondremos un límite de desplazamiento al arquero por instante de tiempo. Es decir, cada vez que decidamos moverlo podremos hacerlo
+como máximo en una magnitud menor o igual al límite máximo de desplazamiento impuesto de antemano.
+La información con la que contaremos para decidir los movimientos del arquero son mediciones sobre la posición de la pelota para determinados
+instantes cuyo orden conoceremos. Las mediciones son realizadas a intervalos regulares de tiempo, de esta forma, nos queda discretizado el mismo en los intantes 
+recibidos y sólo podemos saber el orden de los mismos pero ninguna información sobre la pelota entre dos instantes dados. Además, sabemos
+que las mediciones pueden tener ruido o errores propias de la misma medición.
+Los postes del arco están ubicados en coordenadas fijas, y la línea de gol es el segmento entre estos dos puntos.
+Se marca un gol cuando la pelota cruza este segmento. Visto desde arriba, la pelota es un círculo de radio
+determinado y el arquero se representa mediando un segmento paralelo a la línea de gol ubicado sobre la misma.
+Inicialmente el arquero se encuentra en un punto entre estos dos segmentos y en cada paso se le indica al arquero
+en qué sentido y en qué magnitud debe moverse, ya que la dirección sobre la que se mueve es siempre la misma, la 
+línea de gol.
+Además contaremos con las posiciones de los jugadores rivales en el campo de juego. Para simplificar el alcance y
+el modelo propuesto asumiremos que la posición de los jugadores no varía con el tiempo aunque sí pueden intervenir
+en el juego y desviar la pelota con un remate al arco o un pase a otro jugador.
+En cada instante nuestro desafío reside en decidir cómo utilizar la información de los instantes anteriores y el actual para aproximar 
+la posición por la que la pelota ingresará al arco y así mover al arquero a esa posición para atajarla. Para la predicción de la 
+posición por donde entrará la pelota, nos basamos en el método de \emph{cuadrados mínimos lineales}. 
+Este método es particularmente adecuado para los casos en que se introducen errores de medición\cite[\emph{3.2}]{heath} como ocurre 
+en las mediciones de la trayectoria del balón.
+\par
+La trayectoria de la pelota la formalizaremos mediante una función $p:\mathbb{R} \to \mathbb{R}^2$, $p(t) = (x(t),y(t))$ donde 
+$t$ es el tiempo y $x(t)$ la coordenada $x$ del balón en el instante $t$ e $y(t)$ la coordenada $y$ del balón en el mismo instante considerando
+que abstraemos al campo de juego como puntos en un eje de coordenadas en el cual los arcos se ubican paralelos al eje $y$.
+El método de cuadrados mínimos\cite{burden}  lo utilizaremos para calcular los coeficientes de dos polinomios $P_x(t)$ y $P_y(t)$ que aproximen a las funciones 
+$x(t)$ e $y(t)$, respectivamente, de forma tal que el error cuadrático sea mínimo:
+\begin{displaymath}
+  E_c(P_{x/y}) = \frac{\sum_{k=1}^{n}({x/y}_k-P_{x/y}(t_k))^2}{n} 
+\end{displaymath}
+con $n$ igual a la cantidad de mediciones y $x/y_k$ el valor de la coordenada $x$ o $y$ de la medición realizada en el instante $k$.
+

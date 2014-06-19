@@ -28,3 +28,6 @@
 *.toc
 *.aux
 *.fdb_latexmk
+*.tex.kate-swp
+*.bbl
+*.blg
