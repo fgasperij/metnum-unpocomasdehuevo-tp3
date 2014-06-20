@@ -59,6 +59,9 @@ struct Data{
 	// Trayectoria de la pelota
 	vector<Posicion> trayectoria;
 
+	// Jugadores
+    vector<Posicion> jugadores;
+
     void show_info(){
 		cout<<YELLOW;
 		cout << "\n -- Info de los datos de entrada --";
@@ -69,6 +72,11 @@ struct Data{
 		cout << "\n TRAYECTORIA:\t" << endl;
         for(unsigned int i=0; i < trayectoria.size(); i++){
             cout << trayectoria[i].x << " " << trayectoria[i].y;
+            cout << endl;
+        }
+		cout << "\n JUGADORES:\t" << endl;
+        for(unsigned int i=0; i < jugadores.size(); i++){
+            cout << jugadores[i].x << " " << jugadores[i].y;
             cout << endl;
         }
 		cout<<ENDCOLOR << flush;
