@@ -13,7 +13,7 @@ calidad. Es por eso que destinaremos un experimento entero a evaluar qué tasa d
 de puntos de la trayectoria.
 
 \subsection{Bases generales}
-Para determinar si cierta combinación de parámetros tuve una mejor performance que otra vamos a basarnos exclusivamente en la tasa de
+Para determinar si cierta combinación de parámetros tuvo una mejor performance que otra, vamos a basarnos exclusivamente en la tasa de
 efectividad de atajadas del arquero. Solamente vamos a considerar si nuestra aproximación converge a la posición final en el experimento
 para evaluar el método.
 Para generar instancias basadas en una función polinómica de grado $g$ tomamos un punto al azar del campo de juego y otro al azar entre los dos postes 
@@ -31,8 +31,8 @@ grado. Además introduciremos un ruido de hasta $5\%$ de error, es decir, el val
 original de la función en el punto. Dejaremos de lado a los jugadores y los errores extraordinarios en este experimento ya que nos interesa
 simplemente evaluar cómo se comporta el método con trayectorias simples.
 Separaremos rectas, parábolas y las curvas de tercer grado. Generaremos instancias aleatorias para cada una pero todas compartirán la misma
-cantidad de mediciones. Luego iremos calculando en cada instante la distancia entre el $t_{gol}$ real y nuestra aproximación del mismo y lo
-mismo para el lugar por el cual el balón atraviesa la línea de meta. De esta forma podremos ver si nuestra aproximación converge a el
+cantidad de mediciones. Luego, iremos calculando en cada instante la distancia entre el $t_{gol}$ real y nuestra aproximación del mismo y lo
+mismo para el lugar por el cual el balón atraviesa la línea de meta. De esta forma podremos ver si nuestra aproximación converge al
 valor final tanto en el tiempo como en la posición.
 
 \subsubsection{Grado del polinomio}
