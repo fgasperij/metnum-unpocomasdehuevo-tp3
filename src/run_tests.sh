@@ -4,7 +4,7 @@ cantRec=5
 cantCuad=5
 cantCub=5
 cantVarArq=4
-cant_tests=12
+cant_tests=20
 
 #Directorios
 rec="rectas"
