@@ -29,7 +29,6 @@ vector<T> ultimos(const vector<T>& vec,int cant = 0){
     vector<T> aux = vec;
     reverse(aux.begin(), aux.end());
     aux.resize(cant);
-    reverse(aux.begin(), aux.end());
     return aux;
 }
 
