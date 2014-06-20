@@ -6,6 +6,12 @@
 #include <sstream>
 
 /**
+ * MODO DE USO
+ *
+ * ./generar grado cantMediciones cantInstancias ruido
+ */
+
+/**
  * Formato del archivo de salida
  * 
  * posiciónArq posPoste1 posPoste2 cotaDesplazamiento
