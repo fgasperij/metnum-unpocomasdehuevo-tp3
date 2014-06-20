@@ -34,6 +34,10 @@ int contarLineas(const char* file);
 void leerDatosBasicos(const char* file, Data& data);
 
 
+void leerDatosJugadores(const char* file, Data& data);
+
+std::ifstream::pos_type filesize(const char* filename);
+
 // Escribe los resultados en archivo de salida.
 template<class T>
 void escribirVectorS(ostream& os, const vector<T>& b, int modo = VERT){

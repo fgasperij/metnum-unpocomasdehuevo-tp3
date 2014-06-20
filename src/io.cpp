@@ -67,6 +67,30 @@ void leerDatosBasicos(const char* file, Data& data)
 	file_s.close();
 }
 
+//Lee los posiciones de los jugadores del archivo.
+void leerDatosJugadores(const char* file, Data& data)
+{
+    int cant_lineas = contarLineas(file);
+	ifstream file_s; file_s.open(file);
+	data.jugadores = vector<Posicion> (0);
+    if(filesize(file) > 0){
+        for(int i=0; i < cant_lineas; i++){
+            Posicion temp;
+            file_s >> temp.x >> temp.y;
+            (data.jugadores).push_back(temp);
+        }
+    }
+
+	file_s.close();
+}
+
+std::ifstream::pos_type filesize(const char* filename)
+{
+    std::ifstream in(filename, std::ifstream::in | std::ifstream::binary);
+    in.seekg(0, std::ifstream::end);
+    return in.tellg();
+}
+
 void escribirTiempo(const char*  file, string st){
 	ofstream file_s; file_s.open(file, fstream::app);
 	file_s << st;

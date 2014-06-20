@@ -23,8 +23,8 @@ int main(int argc, char **argv)
     if(argc != 4 && argc != 3){cerr << "Cantidad de parametros incorrecta " ;return 0;}
 	char * file_in = argv[1];
 	char * file_out = argv[2];
-//	char * file_jug;
-//	if(argc == 4){file_jug = argv[3];}
+	char * file_jug = 0;
+	if(argc == 4){file_jug = argv[3];}
 	/*** Para evitar que se cambie el color al salir con Ctrl+C u otros ***/
 	struct sigaction sigIntHandler;
 	sigIntHandler.sa_handler = my_handler;
@@ -41,6 +41,7 @@ int main(int argc, char **argv)
 
 	Data data;
 	leerDatosBasicos(file_in, data);
+	leerDatosJugadores(file_jug, data);
 
 	Disparo disparo = Disparo(data.trayectoria);
 	Arquero higuita = Arquero("Higuita", data.lim_inf, data.lim_sup, data.mu, data.pos_arq);
