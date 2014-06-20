@@ -37,14 +37,10 @@ valor final tanto en el tiempo como en la posición.
 
 \subsubsection{Grado del polinomio}
 El objetivo de este experimento es analizar si la tasa de efectividad mejora aproximando las funciones $x(t)$ e $y(t)$ con un grado en 
-particular de polinomio de cuadrados mínimos. Probaremos primer grado, segundo grado, tercer grado y además compararemos aproximando
-con el mayor grado posible. Nuestra hipótesis es que a medida que aumentamos el grado la tasa de efectividad mejorará hasta cierto umbral en 
-el cual aumentos en el grado no redundan en mejoras en la aproximación. Esto creemos que se debería a que en general las trayectorias de los 
-disparos no describen curvas con más de dos puntos de inflexión.
+particular de polinomio de cuadrados mínimos. Probaremos desde el primer grado hasta el décimo grado. La idea principal detrás de esta experimentación es calcular cual es el grado óptimo para que la tasa de efectividad sea lo mejor posible. Se presume que un grado muy bajo no va a ser eficiente ya que no puede interpolar muchas puntos y va a ser malo para aproximar curvas algo complicadas, y tampoco lo va a ser un grado alto, ya que suelen ser curvas muy oscilantes que pueden introducir error. Para cada grado se testearon todas las instancias fijando la cantidad de puntos a considerar (siempre los últimos) y se tomo el promedio de dichos resultados. Se toman instancias de todo tipo, tanto de la cátedra como propias.
 
 \subsubsection{Puntos a considerar}
-La trayectoria se compone de una serie de puntos, sin embargo, nuestra hipótesis es que los puntos que se corresponden con los instantes más
-recientes aportan información de mayor calidad y permiten realizar una aproximación más certera. 
+Para esta experimentación se desea ver como afecta la cantidad de puntos que se consideran para hallar el polinomio de aproximación de cuadrados mínimos. Siempre se van a considerar los últimos puntos medidos. En principio, una cantidad baja de puntos podría no ser buena ya que no son suficientes para estimar curvas complicadas, tampoco sería bueno que la cantidad sea demasiado alta porque la estimación podría ser más propensa a errores, especialmente considerando la presencia de jugadores que pueden alterar el curso de la pelota de manera inesperada y que no corresponda con alguna curva ``natural''. Como en la experimentación anterior, se usan todo tipo de instancias.
 
 
 \subsubsection{Errores extraordinarios}
