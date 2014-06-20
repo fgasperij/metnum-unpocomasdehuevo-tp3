@@ -16,14 +16,14 @@ De esta forma la posición de la pelota queda descripta por una función $p:\mat
 Nuestro procedimiento para decidir el sentido y la magnitud del desplazamiento del arquero para un instante $t$ consiste de los siguientes
 pasos:
 \begin{enumerate}
- \item aproximamos la función $x(t)$ con cuadrados mínimos y obtenemos $P_x(t)$
+ \item aproximamos la función $x(t)$ con cuadrados mínimos obteniendo $P_x(t)$
  \item calculamos una raíz de $x'(t) = x(t) - x_{posicionDelArco}$ para conocer en qué instante $t_{raiz}$ atraviesa la línea de meta
- \item aproximamos la función $y(t)$ con cuadrados mínimos y obtenemos $P_y(t)$
+ \item aproximamos la función $y(t)$ con cuadrados mínimos obteniendo $P_y(t)$
  \item evaluamos $P_y(t)$ en $t_{raiz}$ para obtener $P_y(t_{raiz}) = y_{aproximacion}$
  \item calculamos el desplazamiento óptimo del arquero asumiendo que el disparo ingresará por $y_{aproximacion}$
 \end{enumerate}
 
-La aproximación de la función $x(t)$ (para $y(t)$ es análogo) mediante el método de cuadrados mínimos la hacemos resolviendo el sistema:
+El planteo formal del método de cuadrados mínimos para la aproximación de la función $x(t)$ (para $y(t)$ es análogo) es el siguiente:
 \begin{displaymath}
 \begin{pmatrix}
   0^n & \cdots    & 0^1 & 1	\\
@@ -47,12 +47,12 @@ La aproximación de la función $x(t)$ (para $y(t)$ es análogo) mediante el mé
 \end{displaymath}
 
 donde la cantidad de filas se corresponde con la cantidad de instantes $t$ que consideramos de la trayectoria y $n$ es el grado del 
-polinomio con el que estimamos a $x(t)$. Para resolver el sistema utilizamos eliminación gaussiana por ser un métodos de simple
-implementación. Una vez resuelto el sistema utilizamos los $a_i$ para construir el polinomio que aproxima a $x(t)$ de la siguiente forma:
+polinomio con el que estimamos a $x(t)$. Resolviendo el sistema de ecuaciones normales correspondiente al sistema anterior, obtenemos los coeficientes de $P_x(t)$. Para resolverlo utilizamos eliminación gaussiana por ser un métodos de simple
+implementación. La solución son los $a_i$ con los que construimos el polinomio que aproxima a $x(t)$ de la siguiente forma:
 \begin{displaymath}
 P_x(t)=a_n*t^n + \cdots + a_1*t + a_0 
 \end{displaymath}
-Sabemos que $P_x(t)$ es el polinomio de grado $n$ que minimiza la suma del error cuadrático con respecto a las mediciones. 
+Así resulta que $P_x(t)$ es el polinomio de grado $n$ que minimiza la suma del error cuadrático con respecto a las mediciones. 
 \par
 La línea de meta se encuentra en un valor fijo de $x$ al que nos referiremos como $x_{posicionDelArco}$. El arquero siempre está 
 situado sobre ese valor $x_{posicionDelArco}$ y se mueve a lo largo del eje $y$. Nuestra estimación debe ser el valor de $y$ por el
