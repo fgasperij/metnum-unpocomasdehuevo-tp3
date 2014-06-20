@@ -10,6 +10,7 @@ do
 		echo $grado
 		echo "Cantidad de mediciones: "
 		echo $medicion
+		python modifConfig.py -mg $grado -cm $medicion
 		./run_test_fast.sh		
 	done
 done
