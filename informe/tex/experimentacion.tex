@@ -4,26 +4,52 @@
 La efectividad del método estará dada por la calidad de la aproximación del lugar por el cual el disparo llegará a la línea de meta. 
 Nuestra aproximación de $x(t)$ nos da el instante en el cual el balón atravesará la línea de meta y luego nuestra aproximación
 de $y(t)$ nos dirá el lugar por dónde lo hará. Las variables principales que entran en juego al aproximar una función con 
-cuadrados mínimos son las mediciones a considerar, los puntos, y el grado del polinomio con el cual se aproximará la función.
-
-
-De qué grado será el polinomio con el cual aproximaremos a las funciones $x(t)$ e $y(t)$. Alguno tiene más sentido que otro. ¿Tiene
-sentido que sea el mismo para las dos?
-
-¿Tiene sentido considerar todos los puntos de la trayectoria? ¿Algunos puntos contienen más información que otros?
-
-¿Tiene sentido hacer varias aproximaciones y comparar? ¿Qué información nos estaría brindando cada una?
-
-
+cuadrados mínimos son las mediciones a considerar, es decir los puntos, y el grado del polinomio con el cual se aproximará la función.
+Creemos que un análisis físico sobre las diferentes fuerzas que puedan afectar a la dirección y aceleración del balón puede indicar 
+más firmemente qué grados tiene más sentido utilizar para cuadrados mínimos. Sin embargo, el mismo cae fuera del alcance del presente 
+trabajo por lo cual nos limitaremos a experimentar con el mayor rango de grados posible y quizás los resultados nos arrojen alguna pista.
+Con respecto a qué puntos de la trayectoria utilizar intuimos que no todos los puntos de la trayectoria proveen información de la misma 
+calidad. Es por eso que destinaremos un experimento entero a evaluar qué tasa de efectividad obtenemos tomando diferentes subconjuntos 
+de puntos de la trayectoria.
 
 \subsection{Bases generales}
 Para determinar si cierta combinación de parámetros tuve una mejor performance que otra vamos a basarnos exclusivamente en la tasa de
-efectividad de atajadas del arquero. Generamos instancias de 3 tipos: rectas, cuadráticas y aleatorias.
+efectividad de atajadas del arquero. Solamente vamos a considerar si nuestra aproximación converge a la posición final en el experimento
+para evaluar el método.
+Para generar instancias basadas en una función polinómica de grado $g$ tomamos un punto al azar del campo de juego y otro al azar entre los dos postes 
+del arco. Luego tomamos tantos puntos al azar sobre el campo de juego entre el primer punto y la línea de meta hasta alcanzar una cantidad
+de puntos igual a $\#p = g + 1$. Con esos puntos generamos el polinomio de Lagrange asociado y con el mismo generamos el resto de los puntos
+que queramos para nuestra trayectoria.
 
 \subsection{Experimentos}
 
+\subsubsection{Evaluación del método}
+El objetivo de esta experimentación es evaluar si la aproximación de nuestro método realmente converge al valor final del $t_{gol}$ y a 
+la posición $y$ por la cual el balón atraviesa la línea de meta. Lo haremos con lo que consideramos disparos básicos de una situación
+real de juego. Éstos comprenden disparos con trayectorias que describen rectas, parábolas y curvas generadas por polinomios de tercer
+grado. Además introduciremos un ruido de hasta $5\%$ de error, es decir, el valor recibido puede variar hasta en un $5\%$ del valor
+original de la función en el punto. Dejaremos de lado a los jugadores y los errores extraordinarios en este experimento ya que nos interesa
+simplemente evaluar cómo se comporta el método con trayectorias simples.
+Separaremos rectas, parábolas y las curvas de tercer grado. Generaremos instancias aleatorias para cada una pero todas compartirán la misma
+cantidad de mediciones. Luego iremos calculando en cada instante la distancia entre el $t_{gol}$ real y nuestra aproximación del mismo y lo
+mismo para el lugar por el cual el balón atraviesa la línea de meta. De esta forma podremos ver si nuestra aproximación converge a el
+valor final tanto en el tiempo como en la posición.
+
 \subsubsection{Grado del polinomio}
+El objetivo de este experimento es analizar si la tasa de efectividad mejora aproximando las funciones $x(t)$ e $y(t)$ con un grado en 
+particular de polinomio de cuadrados mínimos. Probaremos primer grado, segundo grado, tercer grado y además compararemos aproximando
+con el mayor grado posible. Nuestra hipótesis es que a medida que aumentamos el grado la tasa de efectividad mejorará hasta cierto umbral en 
+el cual aumentos en el grado no redundan en mejoras en la aproximación. Esto creemos que se debería a que en general las trayectorias de los 
+disparos no describen curvas con más de dos puntos de inflexión.
+
 \subsubsection{Puntos a considerar}
+La tryectoria se compone de una serie de puntos, sin embargo, nuestra hipótesis es que los puntos que se corresponden con los instantes más
+recientes aportan información de mayor calidad y permiten realizar un aproximación más certera.
+
+
 \subsubsection{Errores extraordinarios}
+
+
 \subsubsection{Jugadores}
+
 \subsubsection{Atajadas con memoria}
