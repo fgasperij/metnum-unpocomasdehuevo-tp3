@@ -43,22 +43,22 @@ done
 # Veo los partidos.
 for((i=1; i < $cantRec+1; i++))
 do
-	python main.py $inst/$rec/r$i.$arq $inst/$rec/r$i.$tiro $inst/vacio.$jug
+	python mainFast.py $inst/$rec/r$i.$arq $inst/$rec/r$i.$tiro $inst/vacio.$jug
 done
 
 for((i=1; i < $cantCuad+1; i++))
 do
-	python main.py $inst/$cuad/c$i.$arq $inst/$cuad/c$i.$tiro $inst/vacio.$jug
+	python mainFast.py $inst/$cuad/c$i.$arq $inst/$cuad/c$i.$tiro $inst/vacio.$jug
 done
 
 for((i=1; i < $cantCub+1; i++))
 do
-	python main.py $inst/$cub/cb$i.$arq $inst/$cub/cb$i.$tiro $inst/vacio.$jug
+	python mainFast.py $inst/$cub/cb$i.$arq $inst/$cub/cb$i.$tiro $inst/vacio.$jug
 done
 
 # fancy, tiro libre
-./tp $inst/fancy/$tirolibre1.$tiro $inst/fancy/tirolibre1.$arq $inst/fancy/tirolibre1.$jug
-python main.py $inst/fancy/tirolibre1.$arq $inst/fancy/tirolibre1.$tiro $inst/fancy/tirolibre1.$jug
+./tp $inst/fancy/tirolibre1.$tiro $inst/fancy/tirolibre1.$arq $inst/fancy/tirolibre1.$jug
+python mainFast.py $inst/fancy/tirolibre1.$arq $inst/fancy/tirolibre1.$tiro $inst/fancy/tirolibre1.$jug
 
 
 # Resuelvo instancias con ruido.
@@ -73,15 +73,15 @@ python main.py $inst/fancy/tirolibre1.$arq $inst/fancy/tirolibre1.$tiro $inst/fa
 ./tp $instRuido/rp70.$tiroRuido $instRuido/rp70.$arq $instRuido/rp70.$jug
 
 # Partidos
-python main.py $instRuido/cbp30.$arq $instRuido/cbp30.$tiroRuido $instRuido/cbp30.$jug
-python main.py $instRuido/cbp30.$arq $instRuido/cbp70.$tiroRuido $instRuido/cbp70.$jug
-python main.py $instRuido/cp30.$arq $instRuido/cp30.$tiroRuido $instRuido/cp30.$jug
-python main.py $instRuido/cp30.$arq $instRuido/cp70.$tiroRuido $instRuido/cp70.$jug
-python main.py $instRuido/f2p90.$arq $instRuido/f2p90.$tiroRuido $instRuido/f2p90.$jug
-python main.py $instRuido/fp30.$arq $instRuido/fp30.$tiroRuido $instRuido/fp30.$jug
-python main.py $instRuido/fp70.$arq $instRuido/fp70.$tiroRuido $instRuido/fp70.$jug
-python main.py $instRuido/rp30.$arq $instRuido/rp30.$tiroRuido $instRuido/rp30.$jug
-python main.py $instRuido/rp70.$arq $instRuido/rp70.$tiroRuido $instRuido/rp70.$jug
+python mainFast.py $instRuido/cbp30.$arq $instRuido/cbp30.$tiroRuido $instRuido/cbp30.$jug
+python mainFast.py $instRuido/cbp30.$arq $instRuido/cbp70.$tiroRuido $instRuido/cbp70.$jug
+python mainFast.py $instRuido/cp30.$arq $instRuido/cp30.$tiroRuido $instRuido/cp30.$jug
+python mainFast.py $instRuido/cp70.$arq $instRuido/cp70.$tiroRuido $instRuido/cp70.$jug
+python mainFast.py $instRuido/f2p90.$arq $instRuido/f2p90.$tiroRuido $instRuido/f2p90.$jug
+python mainFast.py $instRuido/fp30.$arq $instRuido/fp30.$tiroRuido $instRuido/fp30.$jug
+python mainFast.py $instRuido/fp70.$arq $instRuido/fp70.$tiroRuido $instRuido/fp70.$jug
+python mainFast.py $instRuido/rp30.$arq $instRuido/rp30.$tiroRuido $instRuido/rp30.$jug
+python mainFast.py $instRuido/rp70.$arq $instRuido/rp70.$tiroRuido $instRuido/rp70.$jug
 
 # Resuelvo instancias variando la posicion del arquero.
 for((i=1; i < $cantVarArq+1; i++))
@@ -92,7 +92,7 @@ done
 # Veo los partiditos.
 for((i=1; i < $cantVarArq+1; i++))
 do
-	python main.py $instVA/$i.$arq $instVA/$i.$tiro $instVA/$i.$jug
+	python mainFast.py $instVA/$i.$arq $instVA/$i.$tiro $instVA/$i.$jug
 done
 
 # Resuelvo tests propios
@@ -104,7 +104,7 @@ done
 # Veo el partido para los tests propios
 for((i=1; i < $cant_tests+1; i++))
 do
-	python main.py $tests/$i.$arq $tests/$i.$tiro $tests/$i.$jug
+	python mainFast.py $tests/$i.$arq $tests/$i.$tiro $tests/$i.$jug
 done
 
 
