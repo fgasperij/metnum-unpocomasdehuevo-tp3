@@ -97,14 +97,6 @@ struct Data{
 // Grado maximo -1 del polinomio
 #define MAX_GRADO 4
 
-// Ultimas aproximaciones a utilizar para eliminar outliers.
-#define CANT_APROX 4
-
-// Valor para el cual se considerar un outlier
-#define UMBRAL_MAX 500
-
-// Precicion decimal para la salida
-#define PRECISION 6
 
 /*** Definiciones para io.h ***/
 
@@ -133,5 +125,7 @@ struct Data{
 
 #define SUP 1
 #define INF 0
+
+#define PRECISION 6
 
 #endif

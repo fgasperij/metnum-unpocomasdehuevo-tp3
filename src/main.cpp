@@ -24,7 +24,10 @@ int main(int argc, char **argv)
 	char * file_in = argv[1];
 	char * file_out = argv[2];
 	char * file_jug = 0;
-	if(argc == 4){file_jug = argv[3];}
+	if(argc == 4){
+	    file_jug = argv[3];
+	}
+
 	/*** Para evitar que se cambie el color al salir con Ctrl+C u otros ***/
 	struct sigaction sigIntHandler;
 	sigIntHandler.sa_handler = my_handler;
@@ -32,7 +35,7 @@ int main(int argc, char **argv)
 	sigIntHandler.sa_flags = 0;
 	sigaction(SIGINT, &sigIntHandler, NULL);
 
-	msg_header();
+//	msg_header();
 
 
     // Cargo parametros de configuracion globales.
@@ -41,11 +44,16 @@ int main(int argc, char **argv)
 
 	Data data;
 	leerDatosBasicos(file_in, data);
-	leerDatosJugadores(file_jug, data);
+
+	if(file_jug != 0){leerDatosJugadores(file_jug, data);}
+    // Si hay jugadores solo uso las ultimas 3 mediciones.
+	if(data.jugadores.size() > 0){
+	    conf.cant_mediciones = 3;
+	}
+
 
 	Disparo disparo = Disparo(data.trayectoria);
 	Arquero higuita = Arquero("Higuita", data.lim_inf, data.lim_sup, data.mu, data.pos_arq);
-
 	// Movimientos del arquero.
 	while(!disparo.detenido()){
 		disparo.tic();
@@ -55,7 +63,7 @@ int main(int argc, char **argv)
 	// Resultado
     escribirVector(file_out, higuita.devolverMovimientos());
 
-	msg_footer();
+//	msg_footer();
     //cout << "Err " << disparo.devErrores() << endl;
 	return 0;
 }
