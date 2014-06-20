@@ -108,4 +108,6 @@ do
 done
 
 
-
+# Calculo de tasa de efectividad.
+echo "Tasa de efectividad: "
+python calcTE.py

@@ -107,5 +107,7 @@ do
 	python main.py $tests/$i.$arq $tests/$i.$tiro $tests/$i.$jug
 done
 
-
+# Calculo de tasa de efectividad.
+echo "Tasa de efectividad: "
+python calcTE.py
 
