@@ -28,45 +28,6 @@ bool Disparo::detenido() {
 	return instanteActual > (int) trayectoria.size()-1;
 }
 
-double Disparo::aproximarConLagrange(){
-
-    // Parametros: Los cargo desde la configuracion global.
-    // El grado maximo a utilizar es cant_mediciones-1
-    int cant_mediciones = conf.cant_mediciones;
-
-	vector<Posicion> trayectoriaActual = devolverTrayectoria();
-
-	vector<double> xs = obtenerXs(trayectoriaActual);
-    vector<double> ys = obtenerYs(trayectoriaActual);
-
-    // Me quedo con la ultima serie de mediciones decrecientes.
-    vector<double> aux = xs;
-    reverse(aux.begin(), aux.end());
-    unsigned int cantCrecientes = contarPrimCrecientes(aux);
-
-    // Elijo el grado maximo posible.
-    int gradoLagrange = min(cant_mediciones, (int) cantCrecientes)-1;
-    if(gradoLagrange == 0){return ys[ys.size()-1];}
-
-    // Tomo la cantidad de puntos necesario.
-    vector<double> xss = ultimos(xs, gradoLagrange+1);
-    vector<double> yss = ultimos(ys, gradoLagrange+1);
-
-    // BISECCION | NEWTON
-    // Si boost devuelve error, pruebo valores hasta hallar el valor..
-    double tiempoGol = 0;
-    try{
-        tiempoGol = calcularRaizLagrange(xss, instanteActual);
-    }
-    catch(...){
-        double pred_y = probarValoresLagrange(xss, yss, instanteActual);
-        // Si no encontre nada, uso la misma que el anterior.
-        if(pred_y < 0){return ys[ys.size()-1];}
-    }
-    double aproximacionFinal = evalLagrange(ys, instanteActual, tiempoGol);
-    return aproximacionFinal;
-}
-
 
 double Disparo::aproximarConCMP(){
     // Parametros: Los cargo desde la configuracion global.
@@ -100,6 +61,7 @@ double Disparo::aproximarConCMP(){
     if(puntosAConsiderar < 2){grados = conf.max_grado;}
     // El grado esta acotado por los puntos a considerar.
     grados = min(puntosAConsiderar, (int) grados);
+    cout << grados << endl;
 	for (unsigned int i = 1; i < grados; i++) {
 
 		vector<double> coeficientesMinimizadoresXs = minimizarConGrado(xss, i, instanteActual);
@@ -115,8 +77,8 @@ double Disparo::aproximarConCMP(){
             aproximaciones.push_back( aproximacion(true, eval(coeficientesMinimizadoresYs, tiempoGol)));
 		}
 		catch(...){
-		    double pred_y = probarValores(coeficientesMinimizadoresXs, coeficientesMinimizadoresYs, instanteActual);
-		    if(pred_y < 0){aproximaciones.push_back(aproximacion(true, pred_y));}
+//		    double pred_y = probarValores(coeficientesMinimizadoresXs, coeficientesMinimizadoresYs, instanteActual);
+//		    if(pred_y > 0){aproximaciones.push_back(aproximacion(true, pred_y));}
             aproximaciones.push_back(aproximacion(false, 0));
 		}
 	}
@@ -131,13 +93,12 @@ double Disparo::aproximarConCMP(){
             cantAproxs++;
         }
 	}
-
+    cout << aproximacionFinal << endl;
 	return aproximacionFinal/1;
 }
 
 double Disparo::estimarPorDondePasa() {
-    if (conf.lagrange){return aproximarConLagrange();}
-    else{return aproximarConCMP();}
+    return aproximarConCMP();
 }
 
 /** TODO:

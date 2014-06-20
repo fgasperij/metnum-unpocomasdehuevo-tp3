@@ -65,7 +65,6 @@ class Disparo{
 		bool flag_test;
 
 		double aproximarConCMP();
-		double aproximarConLagrange();
 
 };
 
