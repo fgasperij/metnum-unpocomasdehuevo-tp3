@@ -99,7 +99,7 @@ se corresponden con los puntos $(x_0, y_0)$, $(x_1, y_1)$, ..., $(x_t, y_t)$ ent
  (\forall j \in \mathbb{N}) j > i \Rightarrow x_j < x_{j-1}
 \end{displaymath}
 
-\subsection{Errores de medición}
+\subsection{Errores de medición}\label{ssec:errores_de_medicion}
 En general asumimos que los errores de medición son pequeños, sin embargo, puede ocurrir que debido a una circunstancia extraordinaria
 se registren algunos valores con un error muy grande. Estos outliers deben reconocerse y tratarse de un modo particular para que perturben en
 la menor medida posible nuestras aproximaciones. En la sección de experimentación se probará un método para reconocerlos y nuestro 
@@ -111,7 +111,7 @@ la medición del instante $t$ para no sumarle velocidad innecesaria a nuestras a
 La posición de los jugadores rivales juega un papel muy importante al momento de aproximar $p(t)$ ya que un jugador puede 
 patear la pelota y cambiar por completo su dirección y su velocidad. En primer lugar, si el balón pasa a una distancia menor a un umbral
 determinado de antemano de la posición de un jugador a la próxima medición no le aplicamos la detección de errores de medición
-extraordinarios que explicamos en la subsección dedicada a ``Errores de medición``. Además una vez que el balón pasa por un jugador vamos a 
+extraordinarios que explicamos en \ref{ssec:errores_de_medicion}. Además una vez que el balón pasa por un jugador vamos a 
 dejar de considerar las mediciones anteriores ya que si el jugador patéo el balón es efectivamente un disparo nuevo y por lo tanto las
 mediciones anteriores no aportan información alguna.
 
