@@ -45,7 +45,6 @@ struct aproximacion {
 struct config {
     int cant_mediciones;
     int max_grado;
-    bool lagrange;
 };
 
 

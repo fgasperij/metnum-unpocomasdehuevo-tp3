@@ -65,15 +65,7 @@ void cargarConfiguracion(const char * file_xml){
     xml_node config =  doc.child("config");
     xml_node cant_mediciones = config.child("cant_mediciones");
     xml_node max_grado = config.child("max_grado");
-    xml_node lagrange = config.child("lagrange");
     if(cant_mediciones){conf.cant_mediciones = atoi((cant_mediciones.text()).get());}
     if(max_grado){conf.max_grado = atoi((max_grado.text()).get());}
-    if(lagrange){
-        string use_lagrange = string(lagrange.text().get());
-        transform(use_lagrange.begin(), use_lagrange.end(), use_lagrange.begin(), ::tolower);
-        if(use_lagrange == "true"){
-            conf.lagrange = true;
-        }
-    }
 
 }

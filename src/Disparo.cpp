@@ -61,7 +61,7 @@ double Disparo::aproximarConCMP(){
     if(puntosAConsiderar < 2){grados = conf.max_grado;}
     // El grado esta acotado por los puntos a considerar.
     grados = min(puntosAConsiderar, (int) grados);
-    cout << grados << endl;
+
 	for (unsigned int i = 1; i < grados; i++) {
 
 		vector<double> coeficientesMinimizadoresXs = minimizarConGrado(xss, i, instanteActual);
@@ -86,15 +86,12 @@ double Disparo::aproximarConCMP(){
 // Por el momento me quedo con la ultima aproximacion valida. Deberia de ser la mas precisa.
     double aproximacionFinal = 0;
     if(aproximaciones.size() == 1){return aproximaciones[0].valor;}
-    double cantAproxs = 0;
 	for(unsigned int i = 1; i < aproximaciones.size(); i++){
         if(aproximaciones[i].valida){
             aproximacionFinal = aproximaciones[i].valor;
-            cantAproxs++;
         }
 	}
-    cout << aproximacionFinal << endl;
-	return aproximacionFinal/1;
+	return aproximacionFinal;
 }
 
 double Disparo::estimarPorDondePasa() {
