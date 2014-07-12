@@ -37,7 +37,7 @@ valor final tanto en el tiempo como en la posición.
 
 \subsubsection{Grado del polinomio}
 El objetivo de este experimento es analizar si la tasa de efectividad mejora aproximando las funciones $x(t)$ e $y(t)$ con un grado en 
-particular de polinomio de cuadrados mínimos. Probaremos desde el primer grado hasta el décimo grado. La idea principal detrás de esta experimentación es calcular cual es el grado óptimo para que la tasa de efectividad sea lo mejor posible. Se presume que un grado muy bajo no va a ser eficiente ya que no puede interpolar muchas puntos y va a ser malo para aproximar curvas algo complicadas, y tampoco lo va a ser un grado alto, ya que suelen ser curvas muy oscilantes que pueden introducir error. Para cada grado se testearon todas las instancias fijando la cantidad de puntos a considerar (siempre los últimos) y se tomo el promedio de dichos resultados. Se toman instancias de todo tipo, tanto de la cátedra como propias.
+particular de polinomio de cuadrados mínimos. Probaremos desde el primer grado hasta el décimo grado. La idea principal detrás de esta experimentación es calcular cual es el grado óptimo para que la tasa de efectividad sea lo mejor posible. Se presume que un grado muy bajo no va a ser eficiente ya que no puede interpolar muchas puntos y va a ser malo para aproximar curvas algo complicadas, y tampoco lo va a ser un grado alto, ya que suelen ser curvas muy oscilantes que pueden introducir error. Para cada grado se testearon todas las instancias fijando la cantidad de puntos a considerar (siempre los últimos) y se tomo el promedio de dichos resultados. Se toman instancias de todo tipo, tanto de la cátedra como propias. En principio se utilizaron todos los grados del 1 al 10 y para cada grado se consideraron 3, 6, 9 y 12 puntos.
 
 \subsubsection{Puntos a considerar}
 Para esta experimentación se desea ver como afecta la cantidad de puntos que se consideran para hallar el polinomio de aproximación de 
@@ -45,7 +45,7 @@ cuadrados mínimos. Siempre se van a considerar los últimos puntos medidos. En 
 buena ya que no son suficientes para estimar curvas complicadas, tampoco sería bueno que la cantidad sea demasiado alta porque la 
 estimación podría ser más propensa a errores, especialmente considerando la presencia de jugadores que pueden alterar el curso de la 
 pelota de manera inesperada y que no corresponda con alguna curva ``natural''. Como en la experimentación anterior, se usan todo tipo 
-de instancias.
+de instancias. Se consideraron solo aproximaciones desde 1 hasta 10 puntos. Los grados a utilizar se fijaron en 3, 4, 5 y 6. Para cada cantidad de puntos a considerar, se promedian los resultados obtenidos con los polinomios de los grados anteriores.
 
 
 %\subsubsection{Errores extraordinarios}
