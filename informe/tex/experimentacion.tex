@@ -13,43 +13,55 @@ calidad. Es por eso que destinaremos un experimento entero a evaluar qué tasa d
 de puntos de la trayectoria.
 
 \subsection{Bases generales}
-Para determinar si cierta combinación de parámetros tuvo una mejor performance que otra, vamos a basarnos exclusivamente en la tasa de
-efectividad de atajadas del arquero. Solamente vamos a considerar si nuestra aproximación converge a la posición final en el experimento
-para evaluar el método.
-Para generar instancias basadas en una función polinómica de grado $g$ tomamos un punto al azar del campo de juego y otro al azar entre los dos postes 
+Criterios que aplicamos a todos los experimentos:
+\begin{enumerate}
+	\item Para determinar si cierta combinación de parámetros tuvo una mejor performance que otra, vamos a basarnos exclusivamente en la tasa 
+	de efectividad de atajadas del arquero. Solamente vamos a considerar si nuestra aproximación converge a la posición final en el experimento para 
+	evaluar el método.
+	\item Para generar instancias basadas en una función polinómica de grado $g$ tomamos un punto al azar del campo de juego y otro al azar entre los dos postes 
 del arco. Luego tomamos tantos puntos al azar sobre el campo de juego entre el primer punto y la línea de meta hasta alcanzar una cantidad
 de puntos igual a $\#p = g + 1$. Con esos puntos generamos el polinomio de Lagrange asociado y con el mismo generamos el resto de los puntos
 que queramos para nuestra trayectoria.
+	\item 
+\end{enumerate}
 
 \subsection{Experimentos}
 
 \subsubsection{Evaluación del método}
-El objetivo de esta experimentación es evaluar si la aproximación de nuestro método realmente converge al valor final del $t_{gol}$ y a 
+El objetivo de esta experimentación es evaluar si la aproximación de nuestro método realmente converge al valor final de 
 la posición $y$ por la cual el balón atraviesa la línea de meta. Lo haremos con lo que consideramos disparos básicos de una situación
-real de juego. Éstos comprenden disparos con trayectorias que describen rectas, parábolas y curvas generadas por polinomios de tercer
-grado. Además introduciremos un ruido de hasta $5\%$ de error, es decir, el valor recibido puede variar hasta en un $5\%$ del valor
-original de la función en el punto. Dejaremos de lado a los jugadores y los errores extraordinarios en este experimento ya que nos interesa
-simplemente evaluar cómo se comporta el método con trayectorias simples.
-Separaremos rectas, parábolas y las curvas de tercer grado. Generaremos instancias aleatorias para cada una pero todas compartirán la misma
-cantidad de mediciones. Luego, iremos calculando en cada instante la distancia entre el $t_{gol}$ real y nuestra aproximación del mismo y lo
-mismo para el lugar por el cual el balón atraviesa la línea de meta. De esta forma podremos ver si nuestra aproximación converge al
-valor final tanto en el tiempo como en la posición.
+real de juego. Éstos comprenden disparos con trayectorias de tres tipos: rectas, parábolas y curvas generadas por polinomios de tercer
+grado. Separaremos en esos tres tipos y generaremos para cada uno de ellos 100 instancias aleatorias. Todas ellas compartirán 
+una cantidad de mediciones igual a 30 y el gráfico que presentaremos se constituirá por los promedios de las instancias de cada tipo. 
+Para obtener la información pertinente iremos calculando en cada instante la distancia entre 
+el $y_{gol}$ real y nuestra aproximación del mismo. De esta forma podremos ver si nuestra aproximación converge al valor final de 
+la posición en la que el balón atraviesa la línea de meta.
+Además introduciremos un ruido de hasta $5\%$, es decir, el valor de la medición generada puede variar hasta en un $5\%$ con 
+respecto al valor original de la función en el punto. La forma en la que introducimos el ruido es la siguiente:
+\begin{enumerate}
+	\item cada punto tiene una probabilidad del $50\%$ de llevar ruido o no
+	\item el porcentaje de ruido introducido es un valor del intervalo $[0, 5]$ elegido aleatoriamente con una distribución uniforme
+	\item el ruido será sumado o restado también con una probabilidad del $50\%$
+\end{enumerate}
+Dejaremos de lado a los jugadores y los errores extraordinarios en este experimento ya que nos interesa simplemente evaluar cómo se 
+comporta el método con trayectorias simples.  
 
 \subsubsection{Grado del polinomio}
 El objetivo de este experimento es analizar si la tasa de efectividad mejora aproximando las funciones $x(t)$ e $y(t)$ con un grado en 
-particular de polinomio de cuadrados mínimos. Probaremos desde el primer grado hasta el décimo grado. La idea principal detrás de esta experimentación es calcular cual es el grado óptimo para que la tasa de efectividad sea lo mejor posible. Se presume que un grado muy bajo no va a ser eficiente ya que no puede interpolar muchas puntos y va a ser malo para aproximar curvas algo complicadas, y tampoco lo va a ser un grado alto, ya que suelen ser curvas muy oscilantes que pueden introducir error. Para cada grado se testearon todas las instancias fijando la cantidad de puntos a considerar (siempre los últimos) y se tomo el promedio de dichos resultados. Se toman instancias de todo tipo, tanto de la cátedra como propias. En principio se utilizaron todos los grados del 1 al 10 y para cada grado se consideraron 3, 6, 9 y 12 puntos.
+particular de polinomio de cuadrados mínimos. Probaremos desde el primer grado hasta el décimo grado. La idea principal detrás de esta 
+experimentación es calcular cual es el grado óptimo para que la tasa de efectividad sea lo mejor posible. Se presume que un grado muy 
+bajo no va a ser eficiente ya que no puede interpolar muchas puntos y va a ser malo para aproximar curvas algo complicadas, y tampoco 
+lo va a ser un grado alto, ya que suelen ser curvas muy oscilantes que pueden introducir error. Para cada grado se testearon todas las instancias 
+fijando la cantidad de puntos a considerar (siempre los últimos) y se tomo el promedio de dichos resultados. Se toman instancias de todo tipo, 
+tanto de la cátedra como propias.
 
 \subsubsection{Puntos a considerar}
-Para esta experimentación se desea ver como afecta la cantidad de puntos que se consideran para hallar el polinomio de aproximación de 
+Para esta experimentación se desea ver cómo afecta la cantidad de puntos que se consideran para hallar el polinomio de aproximación de 
 cuadrados mínimos. Siempre se van a considerar los últimos puntos medidos. En principio, una cantidad baja de puntos podría no ser 
 buena ya que no son suficientes para estimar curvas complicadas, tampoco sería bueno que la cantidad sea demasiado alta porque la 
 estimación podría ser más propensa a errores, especialmente considerando la presencia de jugadores que pueden alterar el curso de la 
-pelota de manera inesperada y que no corresponda con alguna curva ``natural''. Como en la experimentación anterior, se usan todo tipo 
-de instancias. Se consideraron solo aproximaciones desde 1 hasta 10 puntos. Los grados a utilizar se fijaron en 3, 4, 5 y 6. Para cada cantidad de puntos a considerar, se promedian los resultados obtenidos con los polinomios de los grados anteriores.
+pelota de manera inesperada y que no corresponda con alguna curva "natural''. Como en la experimentación anterior, se usan todo tipo 
+de instancias.
 
 
 %\subsubsection{Errores extraordinarios}
-
-%\subsubsection{Jugadores}
-
-%\subsubsection{Atajadas con memoria}

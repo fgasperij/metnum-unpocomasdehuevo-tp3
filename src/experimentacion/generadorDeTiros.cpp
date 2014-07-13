@@ -2,8 +2,8 @@
 #include <vector>
 #include <iostream>
 #include <fstream>
-#include <time.h>
 #include <sstream>
+#include <chrono>
 
 /**
  * MODO DE USO
@@ -70,7 +70,7 @@ int main(int argc, char const *argv[])
 	int anchoArco = POSICION_SEGUNDO_PALO - POSICION_PRIMER_PALO;
 	for (int i = 0; i < cantidadDeInstancias; ++i)
 	{
-		srand(i);
+		srand(time(0));
 		int posicionArquero = generarYRandDentroDelArco(anchoArco);
 		vector<punto> trayectoria = generarTrayectoria(anchoArco, grado, cantidadDeMediciones, ruido);
 
@@ -108,22 +108,19 @@ vector<punto> generarTrayectoria(int anchoArco, int grado, int cantidadDeMedicio
 	int delta = (xInicial - X_LINEA_META)/(cantidadDeMediciones-1);
 	int xActual;
 
-	// cout << "PUNTOS LAGRANGE"<< endl;
-	// for(unsigned i = 0; i < puntosLagrange.size(); ++i) {
-	// 	cout << "X: " << puntosLagrange[i].x << " Y: " << puntosLagrange[i].y << endl;
-	// }
 	
 	for(unsigned i = 0; i < cantidadDeMediciones-1; ++i) {
 		xActual = xInicial - i*delta - (rand() % delta);
-		// cout << "xActual " << xActual << endl;
 		int valor = lagrange(puntosLagrange, xActual);
 		if (ruido > 0) {
 			// introduzco ruido			
 			int amplitudRuido = (ruido*valor)/100;
-			if (amplitudRuido > 0) {
-				srand(i+200);
+			bool llevaRuido = ((rand() % 2) == 0); 
+			if (amplitudRuido > 0 && llevaRuido) {
+				srand(time(0));
 				int ruidoFinal = rand() % (amplitudRuido);
-				if ((i+2)%2 == 0) {
+				bool ruidoPositivo = ((rand() % 2) == 0);
+				if (ruidoPositivo) {
 					valor += ruidoFinal;
 				} else {
 					valor -= ruidoFinal;

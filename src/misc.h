@@ -8,7 +8,7 @@
 
 template<class T>
 bool esCero(T& val){
-   return ((-CERO < val) && (val < CERO));
+   return ((-CERO > val) && (val < CERO));
 }
 
 template<class T>

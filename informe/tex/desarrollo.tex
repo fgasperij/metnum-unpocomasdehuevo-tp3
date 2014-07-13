@@ -17,7 +17,7 @@ Nuestro procedimiento para decidir el sentido y la magnitud del desplazamiento d
 pasos:
 \begin{enumerate}
  \item aproximamos la función $x(t)$ con cuadrados mínimos obteniendo $P_x(t)$
- \item calculamos una raíz de $x'(t) = x(t) - x_{posicionDelArco}$ para conocer en qué instante $t_{raiz}$ atraviesa la línea de meta
+ \item calculamos una raíz de $Q_x(t) = P_x(t) - x_{posicionDelArco}$ para conocer en qué instante $t_{raiz}$ atraviesa la línea de meta
  \item aproximamos la función $y(t)$ con cuadrados mínimos obteniendo $P_y(t)$
  \item evaluamos $P_y(t)$ en $t_{raiz}$ para obtener $P_y(t_{raiz}) = y_{aproximacion}$
  \item calculamos el desplazamiento óptimo del arquero asumiendo que el disparo ingresará por $y_{aproximacion}$
@@ -48,9 +48,14 @@ El planteo formal del método de cuadrados mínimos para la aproximación de la 
 
 donde la cantidad de filas se corresponde con la cantidad de instantes $t$ que consideramos de la trayectoria y $n$ es el grado del 
 polinomio con el que estimamos a $x(t)$. Resolviendo el sistema de ecuaciones normales correspondiente al sistema anterior, obtenemos los coeficientes de $P_x(t)$. Para resolverlo utilizamos eliminación gaussiana por ser un métodos de simple
-implementación. La solución son los $a_i$ con los que construimos el polinomio que aproxima a $x(t)$ de la siguiente forma:
+implementación. Siempre podemos aplicar eliminación gaussiana porque el grado del polinomio que utilizamos para aproximar por cuadrados mínimos, $g$,  es como máximo menor o igual a la cantidad de mediciones que tenemos menos 2. Esto lo decidimos así para nunca utilizar un polinomio interpolador, ya que el mismo sería sensible hasta a los errores de medición.
 \begin{displaymath}
-P_x(t)=a_n*t^n + \cdots + a_1*t + a_0 
+	g \leq \#mediciones - 2 \Longrightarrow \#columnas(A) \leq \#filas(A) - 2
+\end{displaymath}
+por lo tanto la matriz $A$ va a tener rango columna completo.
+ La solución son los $a_i$ con los que construimos el polinomio que aproxima a $x(t)$ de la siguiente forma:
+\begin{displaymath}
+	P_x(t)=a_n*t^n + \cdots + a_1*t + a_0 
 \end{displaymath}
 Así resulta que $P_x(t)$ es el polinomio de grado $n$ que minimiza la suma del error cuadrático con respecto a las mediciones. 
 \par
@@ -66,10 +71,20 @@ de meta. Para aproximar $y(t)$ utilizamos el método de cuadrados mínimos ya ex
 vamos a calcular $t_{gol}$ con nuestro $P_x(t) \approx x(t)$:
 \begin{align}
     P_x(t) = x_{posicionDelArco}  \Longleftrightarrow t = t_{gol}\\
-    P_x(t) - x_{posicionDelArco} = 0 \Longleftrightarrow t = t_{gol}\\
+    P_x(t) - x_{posicionDelArco} = 0 \Longleftrightarrow t = t_{gol}
 \end{align}
-Tomando $P'_x(t) = P_x(t) - x_{posicionDelArco}$ sabemos que si tiene raíces reales mayores al último instante $t$ de la trayectoria 
-entonces $t_{gol}$ es una de ellas. Para encontrarla utilizamos el método de bisección \cite[]{BoostSite}. Una vez que obtenemos 
+Tomando $Q_x(t) = P_x(t) - x_{posicionDelArco}$ sabemos que si tiene raíces reales mayores al último instante $t$ de la trayectoria 
+entonces $t_{gol}$ es una de ellas. Para encontrarla utilizamos el método de bisección \cite[]{BoostSite}. 
+El intervalo inicial $[a,b]$ siempre es el mismo con $a = 0$ y $b = 10000$. Sabemos que $Q_x(0) > 0$ porque el disparo siempre se origina
+dentro del campo de juego. Necesitamos un valor $b$ para el cual sepamos que $Q_x(b) < 0$. Esto es lo mismo que pedir un instante $t$
+para el cual la posición de la pelota se encuentre del otro lado de la línea de meta según nuestra aproximación por cuadrados mínimos. 
+Tomamos un valor lo suficientemente grande como para asegurarnos que el disparo haya terminado antes del mismo. Es cierto que esto
+no nos asegura que $Q_x(b) < 0$ porque podría ser que $Q_x(t)$ tuviera más de una raíz real mayor a 0. Si nos encontraramos con este caso
+lo descartaríamos. Sin embargo, consideramos que las probabilidades son bajas ya que para que el disparo termine en gol debe ir acercándose
+a la línea de meta hasta finalmente cruzarla. Que se vaya acercando hasta finalmente cruzarla lo traducimos a que $Q_x(t)$ debe decrecer hasta finalmente
+cruzar el eje x. Que $Q_x(t)$ vuelva a crecer y así tener otra raíz real intuimos que no es probable dado que no hay mediciones que se lo propongan,
+las últimas deben hacerla decrecer hasta cruzar la línea de meta. 
+Una vez que obtenemos 
 $t_{gol}$ evaluamos: 
 \begin{displaymath}
   P_y(t_{gol}) = y_{aproximacion}
@@ -90,22 +105,38 @@ no atraviese todos los puntos obtenidos por las mediciones. Dados $n$ puntos $(x
 que los interpola de grado menor o igual a $(n-1)$. Por lo tanto, como en el instante $t$ contamos con una trayectoria de $t+1$
 posiciones nuestro $P_{x/y}(t)$ siempre lo construimos con un grado menor a $t$.
 \par
-Cuando intentamos calcular la raíz de $P'_x(t)$ que se corresponde con $t_{gol}$ y no lo conseguimos simplemente descartamos ese $P_x(t)$
+Cuando intentamos calcular la raíz de $Q_x(t)$ que se corresponde con $t_{gol}$ y no lo conseguimos simplemente descartamos ese $P_x(t)$
 e intentamos con otro de grado diferente. Sin embargo, un polinomio tiene un número de raíces igual a su grado por lo tanto cuanto más 
 alto el grado mayor la cantidad de raíces y esto redunda en una mayor dificultad para encontrar la raíz correspondiente a $t_{gol}$. Para
 intentar compensar este efecto sólo tomamos las últimas mediciones que efectivamente se acercan a la línea de meta. Si nuestras mediciones
-se corresponden con los puntos $(x_0, y_0)$, $(x_1, y_1)$, ..., $(x_t, y_t)$ entonces sólo consideraremos los puntos $p_i$ tales que:
+se corresponden con los puntos $(x_0, y_0)$, $(x_1, y_1)$, ..., $(x_t, y_t)$ entonces sólo consideraremos los últimos $p_i$ puntos tales que:
 \begin{displaymath}
- (\forall j \in \mathbb{N}) j > i \Rightarrow x_j < x_{j-1}
+x_i > x_{i-1}
 \end{displaymath}
+es decir, los últimos $p_i$ que efectivamente se están acercando a la meta.
 
 \subsection{Errores de medición}\label{ssec:errores_de_medicion}
 En general asumimos que los errores de medición son pequeños, sin embargo, puede ocurrir que debido a una circunstancia extraordinaria
 se registren algunos valores con un error muy grande. Estos outliers deben reconocerse y tratarse de un modo particular para que perturben en
 la menor medida posible nuestras aproximaciones. En la sección de experimentación se probará un método para reconocerlos y nuestro 
-tratamiento de los mismos será ignorarlos, es decir, continuar aproximando como si esa medición no hubiera sido realizada. Si esa medición
-fue la correspondiente a el instante $t$, cuando obtengamos la medición del instante $t+1$ lo que haremos será extrapolar cuadráticamente
-la medición del instante $t$ para no sumarle velocidad innecesaria a nuestras aproximaciones.
+tratamiento de los mismos será ignorarlos, es decir, continuar aproximando como si esa medición no hubiera sido realizada.  En cada instante $t$ 
+aproximamos el $y_gol$ para mover al arquero y además calculamos: 
+\begin{displaymath}
+	p_{t+1} = (x_{t+1}, y_{t+1})
+\end{displaymath}
+En el instante $t+1$ comparamos la medición que recibimos con nuestra previa aproximación $p_{t+1}$. Calculamos el error relativo total de la siguiente
+forma:
+\begin{displaymath}
+	e_{relativoX} = \frac{|xAproximacion_{t+1} - xMedicion_{t+1}|}{xMedicion_{t}}
+\end{displaymath}
+\begin{displaymath}
+	e_{relativoTotal} = \frac{e_{relativoX} + e_{relativoY}}{2}
+\end{displaymath}
+Si el error relativo total resulta ser mayor al $80\%$ entonces lo que hacemos es descartar esa medición y utilizar nuestra previa aproximación. Luego,
+en el instante $t+2$ utilizaremos como medición del instante $t+1$ una interpolación cuadrática entre los valores de la medición del instante $t$ y 
+la del instante $t+2$. Es necesario aclarar que la detección de outliers sólo se considera válida si evaluamos que el cambio no puede deberse a que un jugador rival
+alteró la trayectoria del balón. Consideramos que un jugador puede haber alterado la trayectoria del balón si el mismo pasa a una distancia menor a 7, la misma
+que se utiliza para considerar si el arquero atajó o no el disparo.
 
 \subsection{Jugadores rivales}
 La posición de los jugadores rivales juega un papel muy importante al momento de aproximar $p(t)$ ya que un jugador puede 
