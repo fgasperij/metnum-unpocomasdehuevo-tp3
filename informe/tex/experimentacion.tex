@@ -50,13 +50,36 @@ Dejaremos de lado a los jugadores y los errores extraordinarios en este experime
 comporta el método con trayectorias simples.  
 
 \subsubsection{Grado del polinomio}
-El objetivo de este experimento es analizar si la tasa de efectividad mejora aproximando las funciones $x(t)$ e $y(t)$ con un grado en 
-particular de polinomio de cuadrados mínimos. Probaremos desde el primer grado hasta el décimo grado. La idea principal detrás de esta 
-experimentación es calcular cual es el grado óptimo para que la tasa de efectividad sea lo mejor posible. Se presume que un grado muy 
-bajo no va a ser eficiente ya que no puede interpolar muchas puntos y va a ser malo para aproximar curvas algo complicadas, y tampoco 
-lo va a ser un grado alto, ya que suelen ser curvas muy oscilantes que pueden introducir error. Para cada grado se testearon todas las instancias 
-fijando la cantidad de puntos a considerar (siempre los últimos) y se tomo el promedio de dichos resultados. Se toman instancias de todo tipo, 
-tanto de la cátedra como propias.
+El objetivo de este experimento es analizar el comportamiento de la tasa de efectividad en función del grado del polinomio
+con el que aproximamos, mediante el método de cuadrados mínimos, las funciones $x(t)$ e $y(t)$. Nos interesa encontrar 
+el grado que maximice la tasa de efectividad. 
+\par
+Nuestra hipótesis es que el gráfico será cóncavo. Creemos en un primer
+momento un aumento del grado implicará un aumento de la efectividad, sin embargo, luego se alcanzará un máximo y se 
+empezará a decrecer. Este comportamiento suponemos que se deberá a que considerando instancias que representen curvas variadas 
+con un grado demasiado bajo el error de la aproximación será alto, sobre todo en las curvas más irregulares, y con un 
+grado demasiado alto la aproximación se volverá más sensible a los errores de medición y perderá capacidad de percibir
+la tendencia del disparo.
+\par
+No conocemos la frecuencia con la que se presentan los diferentes tipos de curvas en los disparo, por lo tanto, la decisión
+más prudente consideramos que consiste en asumir una distribución uniforme. Por esta razón no discriminaremos la tasa de efectividad
+por tipo de curva con la cual fueron generadas las instancias. Vamos a generar un set de instancias lo más variado y equilibrado
+posible que se conformará de la siguiente forma:
+\begin{description}
+	\item[20] provistas por la cátedra. Este conjunto incluye disparos generados por rectas, parábolas y curvas de tercer grado
+	y disparos con ruido.
+	\item[40] instancias generadas por nuestro generador de instancias. El ruido agregado a todas las instancias de este
+	conjunto es mínimo, entre $0\%$ y $5\%$, de la misma manera que se explicó para el experimento de la evaluación del método. 
+	Tenemos 10 instancias generadas con rectas, 10 con parábolas, 10 con curvas de tercer grado y 10 con curvas de cuarto grado.
+	\item[40] instancias generadas por nuestro generador de instancias. El ruido agregado a todas las instancias de este 
+	conjunto varia uniformemente entre $0\%$ y $20\%$ y fue agregado como se explicó el experimento anterior. El grado de las curvas
+	con el que fue generada cada una de las instancias varia también uniformemente entre 0 y 15.
+\end{description}
+es así que tenemos un conjunto final compuesto por 100 instancias distintas. Todas ellas tienen 25 mediciones. Correremos
+las instancias 3 veces considerando sólo las últimas 5, 10 y 15 mediciones para intentar identificar si este parámetro afecta
+sustancialmente a la tasa de efectividad conseguida con cada grado utilizado.
+\par
+Para cada grado la tasa de efectividad final se calculó como el promedio de las tasas de efectividad sobre todas las instancias.
 
 \subsubsection{Puntos a considerar}
 Para esta experimentación se desea ver cómo afecta la cantidad de puntos que se consideran para hallar el polinomio de aproximación de 
