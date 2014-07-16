@@ -35,7 +35,8 @@ El objetivo de esta experimentación es evaluar si la aproximación de nuestro m
 la posición $y$ por la cual el balón atraviesa la línea de meta. Lo haremos con lo que consideramos disparos básicos de una situación
 real de juego. Éstos comprenden disparos con trayectorias de tres tipos: rectas, parábolas y curvas generadas por polinomios de tercer
 grado. Separaremos en esos tres tipos y generaremos para cada uno de ellos 100 instancias aleatorias. Todas ellas compartirán 
-una cantidad de mediciones igual a 30 y el gráfico que presentaremos se constituirá por los promedios de las instancias de cada tipo. 
+una cantidad de mediciones igual a 30 y el gráfico que presentaremos se constituirá por los promedios de las instancias de cada tipo.
+En el gráfico discriminaremos los resultados por el tipo de curva con la que fueron generadas las instancias. 
 Para obtener la información pertinente iremos calculando en cada instante la distancia entre 
 el $y_{gol}$ real y nuestra aproximación del mismo. De esta forma podremos ver si nuestra aproximación converge al valor final de 
 la posición en la que el balón atraviesa la línea de meta.
@@ -82,12 +83,15 @@ sustancialmente a la tasa de efectividad conseguida con cada grado utilizado.
 Para cada grado la tasa de efectividad final se calculó como el promedio de las tasas de efectividad sobre todas las instancias.
 
 \subsubsection{Puntos a considerar}
-Para esta experimentación se desea ver cómo afecta la cantidad de puntos que se consideran para hallar el polinomio de aproximación de 
-cuadrados mínimos. Siempre se van a considerar los últimos puntos medidos. En principio, una cantidad baja de puntos podría no ser 
-buena ya que no son suficientes para estimar curvas complicadas, tampoco sería bueno que la cantidad sea demasiado alta porque la 
+En esta experimentación se desea estudiar cómo afecta a la tasa de efectividad la cantidad de mediciones que se consideran para 
+hallar el polinomio de aproximación de cuadrados mínimos. Siempre consideramos las última mediciones ya que al ser las más recientes
+consideramos que contienen mayor información sobre el disparo y su tendencia actual. En principio, una cantidad baja de puntos podría no ser 
+buena ya que no son suficientes para estimar curvas complicadas, pero tampoco sería bueno que la cantidad sea demasiado alta porque la 
 estimación podría ser más propensa a errores, especialmente considerando la presencia de jugadores que pueden alterar el curso de la 
-pelota de manera inesperada y que no corresponda con alguna curva "natural''. Como en la experimentación anterior, se usan todo tipo 
-de instancias.
+pelota de manera inesperada. Es por esto que una vez más suponemos que el gráfico resultará cóncavo.
+\par
+Consideraremos el mismo conjunto de instancias que en el experimento anterior y correremos las instancias con grados 3, 5, 7 y 10 ya que son los
+que mejor tasa de efectividad obtuvieron.
 
 
-%\subsubsection{Errores extraordinarios}
+

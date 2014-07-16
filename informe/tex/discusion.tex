@@ -5,15 +5,41 @@
 %clara referencia a la teoría la cual se ajustan. Además, se deben mencionar los resul-
 %tados interesantes y los casos “patológicos” encontrados.
 \subsubsection{Convergencia del método}
-Los resultados del experimento arrojaron una convergencia que a simple vista parece cuadrática. Esto nos indica que el método tiene 
-consistencia ya que a medida que tiene más información, la pelota está más cerca y tiene más puntos para considerar, la aproximación
-es cada vez mejor. No sabemos por qué no es constantemente decreciente la función resultante, quizás se deba al ruido. Deberían
-hacerse más experimentos aún para confirmarlo.
+Se puede ver claramente que el método converge para los 3 tipos de instancias utilizados. A partir de el instante 6
+las 3 curvas son monótonas decrecientes, esto quiere decir que a partir de ese momento las aproximaciones realizadas 
+se acercan ininterrumpidamente a $y_gol$. En los primero 5 instantes las curvas correspondientes a instancias 
+de rectas y a curvas de tercer grado no presentan conductas raras, sin embargo, la de parábolas sí. 
+Entre los instantes 2 y 6 crece linealmente. No estamos seguros a qué se debe, nuestra única conjetura es que el error
+pudo haber sido casualmente creciente en ese intervalo. Debería conducirse un nuevo experimento con instancias de ese tipo
+para verificar si ese comportamiento repite.
+\par
+Creemos que los resultados son buenos pero no óptimos. Verificamos que el método es razonable y funciona bien para 
+disparos simples, no obstante, creemos que es necesario en futuros análisis una experimentación más extensiva que incluya
+disparos con jugadores que intervengan, con más ruido y generados por curvas de un grado mayor, más impredecibles. Ya que
+no podemos asegurar una convergencia razonable para ésos otros tipos de instancias. Además, si bien no calculamos
+en el gráfico la velocidad de convergencia intuimos que es lineal y se puede mejorar. Un primer paso en esta dirección
+es utilizar los parámetros optimizados en los experimentos subsiguientes.
 
 \subsubsection{Grado del polinomio}
-Como se estimaba, los mejores grados para aproximar las trayectorias de las pelotas corresponden a los polinomios de grado 4, 5 y 6. 
-Los polinomios grado 1 y 2 tiene una muy mala aproximación. Mientras que los polinomios de grado mayor o igual a 6 empiezan a mostrar 
-una decaída en la tasa de efectividad. Por lo tanto el polinomio final de nuestro aproximación va a el de grado 5.
+Las 4 curvas resultantes son cóncavas lo cual coincide con nuestras hipótesis originales. Independientemente de la cantidad
+de mediciones consideradas siempre un grado obtuvo la mayor tasa de efectividad como máximo absoluto, ya que la curva decrece
+en los dos sentidos a partir de él. No se puede apreciar en el gráfico la concavidad de la curva verde correspondiente a 15 mediciones
+pero intuimos que se debe a que el gráfico termina cerca de su máximo. Para corroborar esto se requiere realizar otro experimento
+con más mediciones.
+\par
+Un patrón que reconocemos en las 4 curvas es que su máximo siempre se ubica en un grado aproximadamente dos unidades menor a la
+cantidad de mediciones tomadas. Ese es un momento muy particular ya que se corresponde con el grado máximo que puede aproximar
+una cierta cantidad de mediciones sin interpolarla. A primera vista esto corroboraría nuestra hipótesis sobre el perjuicio que
+conlleva aproximar con un polinomio que interpole las mediciones pero no lo consideramos conclusivo. Lo que no puede apreciarse 
+en el gráfico es el detrimento en la tasa de efectividad que esperábamos para polinomios de grados altos. Creemos que esto se 
+debe a que no utilizamos grados suficientemente altos, quizás con grados mayores a 10 ya podemos apreciar esto, sin embargo, 
+es necesario realizar nuevos experimentos para continuar el estudio de esa hipótesis.
+\par
+En promedio el grado que mayor tasa de efectividad obtuvo fue el 5. Consideramos que si bien quizás sea el grado más prudente
+para obtener una tasa de efectividad razonable dista mucho de ser el óptimo para cada circunstancia. Claramente existen
+opciones superiores en cada circunstancia en particular pero para optimizar este aspecto creemos que se debería conocer
+más la distribución de la frecuencia de los tipos de disparos o aunque sea intentar descifrar a una curva de qué grado
+se parecen más las mediciones obtenidas y optimizar el grado utilizado para la misma.
 
 \subsubsection{Puntos a considerar}
 En los resultados se puede apreciar que el valor óptimo se alcanza cuando la cantidad de mediciones es 3, sin embargo, se obtuvieron 
