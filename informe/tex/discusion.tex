@@ -42,9 +42,16 @@ más la distribución de la frecuencia de los tipos de disparos o aunque sea int
 se parecen más las mediciones obtenidas y optimizar el grado utilizado para la misma.
 
 \subsubsection{Puntos a considerar}
-En los resultados se puede apreciar que el valor óptimo se alcanza cuando la cantidad de mediciones es 3, sin embargo, se obtuvieron 
-buenos resultados para todos los valores de 4 a 10. Al parecer la cantidad de mediciones no afecta tanto a la tasa de efectividad como 
-si lo hace la variación del grado del polinomio. Nuestra aproximación final va a tomar 8 puntos si no hay jugadores y 3 sí los hay.
-
-
+Los resultados obtenidos se correlacionan bastante con los del experimento anterior ya que se desprende la misma
+relación entre el pico de tasa de efectividad de las curvas y el punto en el que el grado es aproximadamente
+dos unidades menor a la cantidad de mediciones consideradas. Vemos que hasta cierto momento las curvas son prácticamente iguales
+y se van desprendiendo de a una del resto. Esto tiene sentido ya que hasta que la cantidad de mediciones consideradas no supera
+al grado utilizado siempre se está utilizando un polinomio interpolador. Por lo tanto, una curva va a desprenderse del resto
+en el momento en el que las mediciones superen su grado y eso es precisamente lo que se observa en el gráfico.
+\par
+La cantidad de mediciones que tiene una buena tasa de efectividad para todos los grados es 6. Creemos que esto tiene sentido ya que 
+es un valor que está cerca del promedio de los grados considerados. Además, atribuimos el decrecimiento que se produce en
+las curvas correspondientes a instancias de tercer y quinto grado a que a medida que se consideran más mediciones las más
+viejas contienen información sobre el disparo que no sólo los polinomios de grado tan bajo no saben utilizar sino que 
+encima las perjudica ya que las corre innecesariamente.
 
