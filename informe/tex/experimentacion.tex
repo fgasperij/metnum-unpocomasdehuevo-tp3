@@ -22,10 +22,12 @@ Criterios que aplicamos a todos los experimentos:
 del arco. Luego tomamos tantos puntos al azar sobre el campo de juego entre el primer punto y la línea de meta hasta alcanzar una cantidad
 de puntos igual a $\#p = g + 1$. Con esos puntos generamos el polinomio de Lagrange asociado y con el mismo generamos el resto de los puntos
 que queramos para nuestra trayectoria.
-	\item El grado del polinomio utilizado en los experimentos no est
-	\begin{enumerate}
-		\item
-	\end{enumerate}
+	\item el grado del polinomio utilizado para la aproximación en cada uno de los experimentos no está predefinido. Dado un instante $t$ ya
+       se explicó que el grado máximo con el cual aproximamos es igual a la cantidad de mediciones, $t+1$ porque la primer medición se corresponde
+       con el instante $t = 0$, menos dos para evitar el polinomio interpolador. Sin embargo, en muchos casos la aproximación con determinado grado
+       no puede ser utilizada, por ejemplo, porque luego no encontramos la raíz para el polinomio resultante. Por lo tanto en cada instante se tomará
+       la aproximación conseguida con el grado más alto luego de aplicar todas las restricciones ya explicadas.
+
 \end{itemize}
 
 \subsection{Experimentos}
